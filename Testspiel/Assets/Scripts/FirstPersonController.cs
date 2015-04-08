@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FirstPersonController : MonoBehaviour {
 
-   public float movementSpeed = 5.0f;
+   private float movementSpeed = 5.0f;
    public float mouseSensitivity = 3.0f;
 
    public float jumpSpeed = 5.0f;
@@ -16,7 +16,9 @@ public class FirstPersonController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Screen.lockCursor = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+       
         characterController = GetComponent<CharacterController>();
         
 	}
