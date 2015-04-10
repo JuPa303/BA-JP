@@ -7,41 +7,58 @@ public class NewHighlight : MonoBehaviour
     public Texture aTexture;
     private Vector3 screenPos, viewportPos;
     private bool isSeen;
-    private GameObject ball;
+    private GameObject clue, player;
+    
+    bool isBlockedByWall;
 
 
     // Use this for initialization
     void Start()
     {
-        
-        ball = GameObject.FindGameObjectWithTag("Ball");
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        //clue = GameObject.FindGameObjectWithTag("Clue");
+        getDataFromScripts();
+ 
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        screenPos = Camera.main.WorldToScreenPoint(ball.transform.position);
+        getDataFromScripts();
+      
+
+        screenPos = Camera.main.WorldToScreenPoint(clue.transform.position);
         // Debug.Log("screenPos" + screenPos);
 
-        viewportPos = Camera.main.WorldToViewportPoint(ball.transform.position);
-        
-        if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1)&& (viewportPos.z >0))
+        viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
+        // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
+        //Picture only displayed when camera facing towards clue
+
+        if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0)) 
         {
-            isSeen = true;
-            //Debug.Log("is seen");
+            //no wall between Player and clue 
+            if (!isBlockedByWall) 
+            {
+
+                isSeen = true; 
+            }
+            else
+            {
+                isSeen = false;
+
+            } 
+
         }
         else
         {
             isSeen = false;
         }
-        Debug.Log(isSeen);
+        //Debug.Log(isSeen);
 
     }
-    // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
-
-
+    
 
     void OnGUI()
     {
@@ -50,5 +67,13 @@ public class NewHighlight : MonoBehaviour
         {
             GUI.DrawTexture(new Rect(screenPos.x, Screen.height - screenPos.y, 40, 40), aTexture, ScaleMode.StretchToFill);
         }
+
+    }
+
+    private void getDataFromScripts()
+    {
+        clue = player.GetComponent<FindClosestClue>().closest;
+        isBlockedByWall = clue.GetComponent<SeesCamera>().isBlocked;
+
     }
 }
