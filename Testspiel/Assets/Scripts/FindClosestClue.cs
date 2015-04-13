@@ -21,14 +21,11 @@ public class FindClosestClue : MonoBehaviour
         clues = GameObject.FindGameObjectsWithTag("Clue");
 
         float distance = Mathf.Infinity;
-       
+
         foreach (GameObject go in clues)
         {
 
-            // Debug.Log(go.transform.position);
             float curDistance = CalculatePathMesh(go.transform.position);
-            // Vector3 diff = go.transform.position - position;
-            //float curDistance = diff.sqrMagnitude;
             if (curDistance < distance)
             {
                 closest = go;
@@ -46,7 +43,7 @@ public class FindClosestClue : MonoBehaviour
         //print(FindClue().name);
     }
 
-   public float CalculatePathMesh(Vector3 targetPosition)
+    public float CalculatePathMesh(Vector3 targetPosition)
     {
         NavMeshPath path = new NavMeshPath();
 

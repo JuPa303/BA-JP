@@ -3,22 +3,18 @@ using System.Collections;
 
 public class HighlightController : MonoBehaviour
 {
-
     public Texture aTexture;
     private Vector3 screenPos, viewportPos;
-    private bool isClosestAndSeen;
     private GameObject clue, player;
-
     bool isBlockedByWall;
+    private bool isClosestAndSeen;
 
 
     // Use this for initialization
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        //clue = GameObject.FindGameObjectWithTag("Clue");
         getDataFromScripts();
-
 
     }
 
@@ -28,10 +24,7 @@ public class HighlightController : MonoBehaviour
 
         getDataFromScripts();
 
-        //Debug.Log("Clue " + clue);
         screenPos = Camera.main.WorldToScreenPoint(clue.transform.position);
-        // Debug.Log("screenPos" + screenPos);
-
         viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
 
         // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
@@ -41,13 +34,11 @@ public class HighlightController : MonoBehaviour
             //no wall between Player and clue 
             if (!isBlockedByWall)
             {
-
                 isClosestAndSeen = true;
             }
             else
             {
                 isClosestAndSeen = false;
-
             }
 
         }
@@ -55,11 +46,10 @@ public class HighlightController : MonoBehaviour
         {
             isClosestAndSeen = false;
         }
-       // Debug.Log("isclosestandseen " + isClosestAndSeen);
 
     }
 
-
+    //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
         GUI.color = new Color32(255, 255, 255, 100);
@@ -73,7 +63,6 @@ public class HighlightController : MonoBehaviour
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
-        Debug.Log("clue in highlight " + clue);
         isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
 
     }

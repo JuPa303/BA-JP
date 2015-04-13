@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraSeesClue.cs" />
+     <Compile Include="Assets\Scripts\EyeTrTest.cs" />
      <Compile Include="Assets\Scripts\FindClosestClue.cs" />
      <Compile Include="Assets\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\HighlightController.cs" />
@@ -56,6 +57,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{E3E6E9F2-A2E3-C589-25E9-16A16236B7B6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{FAE44AE7-0501-1CA8-B127-A2337F117CEA}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
