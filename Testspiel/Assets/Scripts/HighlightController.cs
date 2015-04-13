@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewHighlight : MonoBehaviour
+public class HighlightController : MonoBehaviour
 {
 
     public Texture aTexture;
     private Vector3 screenPos, viewportPos;
-    private bool isSeen;
+    private bool isClosestAndSeen;
     private GameObject clue, player;
-    
+
     bool isBlockedByWall;
 
 
@@ -18,7 +18,7 @@ public class NewHighlight : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         //clue = GameObject.FindGameObjectWithTag("Clue");
         getDataFromScripts();
- 
+
 
     }
 
@@ -27,43 +27,43 @@ public class NewHighlight : MonoBehaviour
     {
 
         getDataFromScripts();
-      
 
+        //Debug.Log("Clue " + clue);
         screenPos = Camera.main.WorldToScreenPoint(clue.transform.position);
         // Debug.Log("screenPos" + screenPos);
 
         viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
+
         // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
         //Picture only displayed when camera facing towards clue
-
-        if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0)) 
+        if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
         {
             //no wall between Player and clue 
-            if (!isBlockedByWall) 
+            if (!isBlockedByWall)
             {
 
-                isSeen = true; 
+                isClosestAndSeen = true;
             }
             else
             {
-                isSeen = false;
+                isClosestAndSeen = false;
 
-            } 
+            }
 
         }
         else
         {
-            isSeen = false;
+            isClosestAndSeen = false;
         }
-        //Debug.Log(isSeen);
+       // Debug.Log("isclosestandseen " + isClosestAndSeen);
 
     }
-    
+
 
     void OnGUI()
     {
         GUI.color = new Color32(255, 255, 255, 100);
-        if (isSeen)
+        if (isClosestAndSeen)
         {
             GUI.DrawTexture(new Rect(screenPos.x, Screen.height - screenPos.y, 40, 40), aTexture, ScaleMode.StretchToFill);
         }
@@ -73,7 +73,8 @@ public class NewHighlight : MonoBehaviour
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
-        isBlockedByWall = clue.GetComponent<SeesCamera>().isBlocked;
+        Debug.Log("clue in highlight " + clue);
+        isBlockedByWall = clue.GetComponent<SeesCamera>().isBlocked(clue);
 
     }
 }

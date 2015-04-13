@@ -4,38 +4,78 @@ using System.Collections;
 public class SeesCamera : MonoBehaviour
 {
 
-    public bool isBlocked;
-    private Renderer myRenderer;
+    //public bool isBlocked;
+    private Vector3 direction;
+   
     // Use this for initialization
     void Start()
     {
-        myRenderer = this.GetComponent<Renderer>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        direction = Camera.main.transform.position - transform.position;
 
+
+        //RaycastHit hit;
+        //// Calculate Ray direction
+        //Vector3 direction = Camera.main.transform.position - transform.position;
+        //if (Physics.Raycast(transform.position, direction, out hit)){
+
+           
+
+        //    if (hit.collider.tag != "Player") //hit something else before the camera
+        //    {
+        //        isBlocked = true;
+        //        Debug.Log("doesn't see Camera");
+        //        Debug.Log("hit" +hit);
+
+
+        //    }
+        //    else
+        //    {
+        //        isBlocked = false;
+        //        Debug.DrawRay(transform.position, direction, Color.green);
+        //        Debug.Log("sees Camera");
+
+        //   }
+        //}
+    }
+
+   public bool isBlocked(GameObject go)
+    {
 
         RaycastHit hit;
         // Calculate Ray direction
-        Vector3 direction = Camera.main.transform.position - transform.position;
-        if (Physics.Raycast(transform.position, direction, out hit)){
-      
-           // Debug.DrawRay(transform.position, direction, Color.green);
+         //direction = Camera.main.transform.position - transform.position;
+        if (Physics.Raycast(transform.position, direction, out hit))
+        {
+
+
 
             if (hit.collider.tag != "Player") //hit something else before the camera
             {
-                isBlocked = true;
-                //Debug.Log("doesn't see Camera");
+                
+                Debug.Log("doesn't see Camera");
+                Debug.Log("hit" + hit);
+                return true;
 
             }
             else
             {
-                isBlocked = false;
-                //Debug.Log("sees Camera");
+                
+                Debug.DrawRay(transform.position, direction, Color.green);
+                Debug.Log("sees Camera");
+                return false;
 
-           }
+            }
         }
+
+        return false;
+
     }
+
+    
 }
