@@ -46,10 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraSeesClue.cs" />
      <Compile Include="Assets\Scripts\FindClosestClue.cs" />
      <Compile Include="Assets\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\HighlightController.cs" />
-     <Compile Include="Assets\Scripts\SeesCamera.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>T:/GitHub Repository/BA_JP/Testspiel/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>

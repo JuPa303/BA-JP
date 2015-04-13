@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SeesCamera : MonoBehaviour
+public class CameraSeesClue : MonoBehaviour
 {
 
     //public bool isBlocked;
