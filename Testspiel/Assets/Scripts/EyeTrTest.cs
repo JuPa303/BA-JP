@@ -5,7 +5,7 @@ using iView;
 public class EyeTrTest : GazeMonobehaviour
 {
     Renderer rend;
-
+    public bool gazeOnClue = true;
     Vector3 averageGazePosition;
     Vector2 gazePos;
     GameObject objectInFocus;
@@ -24,14 +24,20 @@ public class EyeTrTest : GazeMonobehaviour
         averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
         gazePos = sample.averagedEye.gazePosInScreenCoords();
         //Debug.Log("averageGazePos" + averageGazePosition);
-         objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
-         if (objectInFocus.tag == "Clue")
-         {
-             rend.material.SetColor("_Color", Color.red);
-         }
-         else
-             rend.material.SetColor("_Color", Color.blue);
-
+        try
+        {
+            objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
+            if (objectInFocus.tag == "Clue")
+            {
+                gazeOnClue = true;
+            }
+            else
+                gazeOnClue = false;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
 
