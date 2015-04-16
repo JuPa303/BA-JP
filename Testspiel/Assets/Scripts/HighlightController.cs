@@ -57,7 +57,7 @@ public class HighlightController : MonoBehaviour
         GUI.color = new Color32(255, 255, 255, 100);
         if (isClosestAndSeen)
         {
-            GUI.DrawTexture(new Rect(cluePos.x - texUnit/2, Screen.height - cluePos.y - texUnit/2, texUnit, texUnit), aTexture, ScaleMode.StretchToFill);
+            GUI.DrawTexture(new Rect((cluePos.x - texUnit/2), (Screen.height - cluePos.y - texUnit/2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill);
         }
 
     }

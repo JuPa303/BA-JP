@@ -5,10 +5,12 @@ using iView;
 public class EyeTrTest : GazeMonobehaviour
 {
     Renderer rend;
-    public bool gazeOnClue = true;
-    Vector3 averageGazePosition;
+    public bool gazeOnClue = false;
+    Vector3 averageGazePosition, gazePoint1, gazePoint2, vectorToClue, vectorToGaze;
     Vector2 gazePos;
-    GameObject objectInFocus;
+    GameObject objectInFocus, clue;
+    SampleData sample;
+    private float angle = 0f;
 
     // Use this for initialization
     void Start()
@@ -20,7 +22,7 @@ public class EyeTrTest : GazeMonobehaviour
     void Update()
     {
 
-        SampleData sample = SMIGazeController.Instance.GetSample();
+        sample = SMIGazeController.Instance.GetSample();
         averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
         gazePos = sample.averagedEye.gazePosInScreenCoords();
         //Debug.Log("averageGazePos" + averageGazePosition);
@@ -29,6 +31,7 @@ public class EyeTrTest : GazeMonobehaviour
             objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
             if (objectInFocus.tag == "Clue")
             {
+                clue = objectInFocus;
                 gazeOnClue = true;
             }
             else
@@ -40,6 +43,49 @@ public class EyeTrTest : GazeMonobehaviour
         }
     }
 
+
+    private void calcDirection()
+    {
+        Vector3[] vectors;
+        vectors = new Vector3[2];
+
+        gazePoint1 = sample.averagedEye.eyePosition;
+
+        vectors[0] = gazePoint1;
+        vectors[1] = gazePoint2;
+       
+
+
+        vectorToClue = clue.transform.position - gazePoint1;
+        //gazePoint2 = sample.averagedEye.eyePosition;
+        vectorToGaze = gazePoint2 - gazePoint1;
+        angle = Vector3.Angle(vectorToClue, vectorToGaze);
+
+        if (angle <= 10)
+        {
+            //don't show clue image
+        }
+
+
+ 
+
+       
+
+        //foreach (Vector3 v in vectors)
+        //{
+
+        //    float curDistance = CalculatePathMesh(go.transform.position);
+        //    if (curDistance < distance)
+        //    {
+        //        closest = go;
+        //        distance = curDistance;
+        //    }
+        //}
+       
+
+
+
+    }
 
 
     //public override void OnGazeStay(RaycastHit hit)
