@@ -3,8 +3,7 @@ using System.Collections;
 
 public class FindClosestClue : MonoBehaviour
 {
-
-    public GameObject closest;
+public GameObject closest;
     private NavMeshAgent nav;
 
     private void Start()
@@ -15,7 +14,7 @@ public class FindClosestClue : MonoBehaviour
         closest = FindClue();
     }
 
-    GameObject FindClue()
+    public GameObject FindClue()
     {
         GameObject[] clues;
         clues = GameObject.FindGameObjectsWithTag("Clue");
@@ -32,6 +31,7 @@ public class FindClosestClue : MonoBehaviour
                 distance = curDistance;
             }
         }
+        
         return closest;
     }
 

@@ -66,7 +66,7 @@ public class HighlightController : MonoBehaviour
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
-        gazeOnClue = clue.GetComponent<EyeTrTest>().gazeOnClue;
+        gazeOnClue = player.GetComponent<EyeTrTest>().gazeOnClue;
 
     }
 }
