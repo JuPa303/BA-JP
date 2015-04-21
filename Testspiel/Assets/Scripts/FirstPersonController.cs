@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FirstPersonController : MonoBehaviour {
+public class FirstPersonController : MonoBehaviour
+{
 
-   private float movementSpeed = 5.0f;
-   public float mouseSensitivity = 3.0f;
+    private float movementSpeed = 5.0f;
+    public float mouseSensitivity = 3.0f;
 
-   public float jumpSpeed = 5.0f;
+    public float jumpSpeed = 5.0f;
 
-   public float upDownRange = 60.0f;
-   float rotUpDown = 0;
-   float verticalVelocity = 0;
+    public float upDownRange = 60.0f;
+    float rotUpDown = 0;
+    float verticalVelocity = 0;
 
-   CharacterController characterController;
+    CharacterController characterController;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-       
-        characterController = GetComponent<CharacterController>();
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        
+        characterController = GetComponent<CharacterController>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
 
         //Rotation
 
@@ -39,16 +42,26 @@ public class FirstPersonController : MonoBehaviour {
         Camera.main.transform.localRotation = Quaternion.Euler(rotUpDown, 0, 0);
 
         //Movement
-        float forwardSpeed = Input.GetAxis("Vertical")* movementSpeed;
+        float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
         float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
 
-        verticalVelocity += Physics.gravity.y *Time.deltaTime;
+        verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
         if (characterController.isGrounded && Input.GetButtonDown("Jump"))
         {
-       
+
             verticalVelocity = jumpSpeed;
         }
+
+        if (characterController.isGrounded && Input.GetButton("Sprint"))
+        {
+
+            movementSpeed = 8.0f;
+        }
+        else
+            movementSpeed = 5.0f;
+
+
 
         Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 
@@ -56,5 +69,8 @@ public class FirstPersonController : MonoBehaviour {
 
 
         characterController.Move(speed * Time.deltaTime);
-	}
+
+        
+
+    }
 }
