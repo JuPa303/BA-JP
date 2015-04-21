@@ -64,7 +64,7 @@ public class HighlightController : MonoBehaviour
     private void setClueStatus(bool isShown)
     {
         showClue = isShown;
-        Debug.Log("Status" + showClue);
+        //Debug.Log("Status" + showClue);
     }
 
 

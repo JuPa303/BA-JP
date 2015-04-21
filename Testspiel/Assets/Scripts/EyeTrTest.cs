@@ -96,21 +96,17 @@ public class EyeTrTest : GazeMonobehaviour
     {
 
 
-        //Vector2[] vectors;
-        //vectors = new Vector2[2];
-
-        //vectors[0] = gazePoint1;
-        //vectors[1] = gazePoint2;
-
-
-        Vector3 cluePos = clue.transform.position;
-        vectorToClue2D = new Vector2(cluePos.x, cluePos.y) - gazePoint1;
+        Vector3 cluePos3D = clue.transform.position;
+        Vector2 cluePos2D = new Vector2(cluePos3D.x, cluePos3D.y);
+        vectorToClue2D = cluePos2D - gazePoint1;
         vectorToGaze = gazePoint2 - gazePoint1;
 
 
         float distanceOfGazeVectors = Vector3.Distance(gazePoint1, gazePoint2);
+        float distanceGP1ToClue = Vector3.Distance(gazePoint1, cluePos2D);
+        float distanceGP2ToClue = Vector3.Distance(gazePoint2, cluePos2D);
 
-        if (distanceOfGazeVectors <= 2)
+        if (distanceOfGazeVectors <= 5)
         {
             hasFirstPoint = true;
             //showClue = false;
@@ -123,26 +119,29 @@ public class EyeTrTest : GazeMonobehaviour
             Debug.Log("Angle " + angle);
 
 
-            // looking in correct direction
+            // looking in correct direction -> don't show clue image
             if (angle <= 20)
             {
-                //don't show clue image
-
-                //showClue = false;
-
+                
                 OnClueStatus(false);
 
                 //Debug.Log("in richtige Richtung");
-                Debug.Log("GP1" + gazePoint1);
-                Debug.Log("GP2" + gazePoint2);
-                Debug.Log("distance" + distanceOfGazeVectors);
+                //Debug.Log("GP1" + gazePoint1);
+                //Debug.Log("GP2" + gazePoint2);
+                //Debug.Log("distance" + distanceOfGazeVectors);
 
+            }
+
+
+            //if gaze turns away from target
+            if (distanceGP1ToClue > distanceGP2ToClue)
+            {
+                OnClueStatus(true);
             }
 
             else
             {
-                //showClue = true;
-
+         
                 OnClueStatus(true);
             }
 
