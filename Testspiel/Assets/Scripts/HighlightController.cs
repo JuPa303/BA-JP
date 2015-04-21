@@ -6,19 +6,29 @@ public class HighlightController : MonoBehaviour
     public Texture aTexture;
     private Vector3 cluePos, viewportPos;
     private GameObject clue, player;
- 
-    private bool isClosestAndSeen, isBlockedByWall, gazeOnClue;
+
+    private bool isClosestAndSeen, isBlockedByWall, showClue;
 
     private int texUnit = 40; //height & width of texture
+
+    public EyeTrTest eyeTrTest;
+
 
 
     // Use this for initialization
     void Start()
     {
+
         player = GameObject.FindGameObjectWithTag("Player");
+
+        eyeTrTest = player.GetComponent<EyeTrTest>();
+        eyeTrTest.OnClueStatus += setClueStatus;
+
         getDataFromScripts();
 
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -34,7 +44,7 @@ public class HighlightController : MonoBehaviour
         if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
         {
             //no wall between Player and clue 
-            if (!isBlockedByWall & !gazeOnClue)
+            if (!isBlockedByWall & showClue)
             {
                 isClosestAndSeen = true;
             }
@@ -51,13 +61,20 @@ public class HighlightController : MonoBehaviour
 
     }
 
+    private void setClueStatus(bool isShown)
+    {
+        showClue = isShown;
+        Debug.Log("Status" + showClue);
+    }
+
+
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
         GUI.color = new Color32(255, 255, 255, 100);
         if (isClosestAndSeen)
         {
-            GUI.DrawTexture(new Rect((cluePos.x - texUnit/2), (Screen.height - cluePos.y - texUnit/2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill);
+            GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill);
         }
 
     }
@@ -66,7 +83,8 @@ public class HighlightController : MonoBehaviour
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
-        gazeOnClue = player.GetComponent<EyeTrTest>().gazeOnClue;
+        //showClue = player.GetComponent<EyeTrTest>().showClue;
+        //Debug.Log("showClue controller" + showClue);
 
     }
 }
