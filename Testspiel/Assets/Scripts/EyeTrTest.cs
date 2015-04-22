@@ -30,7 +30,9 @@ public class EyeTrTest : GazeMonobehaviour
     // Use this for initialization
     void Start()
     {
-
+        //Debug.Log("Screen width " + Screen.width);
+        //Debug.Log("Screen height " + Screen.height);
+        //Debug.Log("calc " + Screen.width/(Screen.dpi/2.54f));
     }
 
 
@@ -39,11 +41,14 @@ public class EyeTrTest : GazeMonobehaviour
     {
         clue = GetComponent<FindClosestClue>().FindClue();
         sample = SMIGazeController.Instance.GetSample();
+
+
         // averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
         gazePos = sample.averagedEye.gazePosInScreenCoords();
 
         getGazes();
         checkGazeOnObject();
+        //screenData();
 
     }
 
@@ -84,7 +89,7 @@ public class EyeTrTest : GazeMonobehaviour
             {
 
                 gazePoint2 = Input.mousePosition;
-                calcDirection();
+                //calcDirection();
             }
         }
 
@@ -116,13 +121,13 @@ public class EyeTrTest : GazeMonobehaviour
         {
             // Debug.Log("next");
             angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
-            Debug.Log("Angle " + angle);
+            //Debug.Log("Angle " + angle);
 
 
             // looking in correct direction -> don't show clue image
             if (angle <= 20)
             {
-                
+
                 OnClueStatus(false);
 
                 //Debug.Log("in richtige Richtung");
@@ -141,7 +146,7 @@ public class EyeTrTest : GazeMonobehaviour
 
             else
             {
-         
+
                 OnClueStatus(true);
             }
 
@@ -153,7 +158,7 @@ public class EyeTrTest : GazeMonobehaviour
     }
 
 
-
+    //check if user's gaze is directly on clue
     private void checkGazeOnObject()
     {
 
@@ -167,8 +172,8 @@ public class EyeTrTest : GazeMonobehaviour
                 //showClue = false;
             }
             //else
-                //showClue = true;
-                //OnClueStatus(true);
+            //showClue = true;
+            //OnClueStatus(true);
         }
 
         catch (System.Exception e)
@@ -180,17 +185,45 @@ public class EyeTrTest : GazeMonobehaviour
 
 
 
-
+    //draw gaze as rectangle
     private void OnGUI()
     {
-
-
-        Texture2D square = new Texture2D(20, 20);
-        square.SetPixel(1, 1, Color.white);
-        square.Apply();
-        GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
+        //Texture2D square = new Texture2D(20, 20);
+        //square.SetPixel(1, 1, Color.white);
+        //square.Apply();
+        //GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
 
     }
 
+
+
+    //Nur ein Versuch, funktioniert so nicht ganz
+    private void screenData()
+    {
+        Vector2 clueVec = Camera.main.WorldToScreenPoint(clue.transform.position);
+        Vector2 gazeInScreenCoord = Camera.main.WorldToScreenPoint(gazePoint2);
+
+        //double screenWidthInCm = (Screen.width * 2.54 / 96.0);
+        //double screenHeightInCm = (Screen.height * 2.54 / 96.0);
+
+        //calculating 2,5 cm in px
+        double radiusCirclePx = (2.5 * Screen.dpi / 2.54);
+        float distanceOfGaze = Vector2.Distance(gazeInScreenCoord, clueVec);
+        Debug.Log("Distance" + distanceOfGaze);
+        Debug.Log("gaze screen" + gazeInScreenCoord);
+        Debug.Log("clueVec" + clueVec);
+        //Debug.Log("radius" + radiusCirclePx);
+
+        if (radiusCirclePx <= distanceOfGaze)
+        {
+            OnClueStatus(false);
+            //Debug.Log("don't show");
+        }
+        else
+        {
+            OnClueStatus(true);
+            //Debug.Log("show");
+        }
+    }
 }
 

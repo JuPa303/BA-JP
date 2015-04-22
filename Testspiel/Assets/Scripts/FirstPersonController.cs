@@ -30,7 +30,6 @@ public class FirstPersonController : MonoBehaviour
     {
 
 
-
         //Rotation
 
         float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -47,12 +46,14 @@ public class FirstPersonController : MonoBehaviour
 
         verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
+        //Jump
         if (characterController.isGrounded && Input.GetButtonDown("Jump"))
         {
 
             verticalVelocity = jumpSpeed;
         }
 
+        //Sprint
         if (characterController.isGrounded && Input.GetButton("Sprint"))
         {
 
@@ -61,16 +62,10 @@ public class FirstPersonController : MonoBehaviour
         else
             movementSpeed = 5.0f;
 
-
-
         Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 
         speed = transform.rotation * speed;
-
-
         characterController.Move(speed * Time.deltaTime);
-
-        
 
     }
 }
