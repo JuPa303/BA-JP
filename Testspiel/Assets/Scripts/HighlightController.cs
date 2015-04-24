@@ -9,7 +9,7 @@ public class HighlightController : MonoBehaviour
 
     private bool isClosestAndSeen, isBlockedByWall, showClue;
 
-    private int texUnit = 40; //height & width of texture
+    private int texUnit = 50; //height & width of texture
 
     public EyeTrTest eyeTrTest;
 
@@ -33,7 +33,7 @@ public class HighlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("blocked by wall" + isBlockedByWall);
         getDataFromScripts();
 
         cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
@@ -64,7 +64,7 @@ public class HighlightController : MonoBehaviour
     private void setClueStatus(bool isShown)
     {
         showClue = isShown;
-        //Debug.Log("Status" + showClue);
+        Debug.Log("Status" + showClue);
     }
 
 
@@ -74,6 +74,7 @@ public class HighlightController : MonoBehaviour
         GUI.color = new Color32(255, 255, 255, 100);
         if (isClosestAndSeen)
         {
+            Debug.Log("Drawing");
             GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
         }
 
