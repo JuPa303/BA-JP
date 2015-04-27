@@ -33,7 +33,7 @@ public class HighlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("blocked by wall" + isBlockedByWall);
+        //Debug.Log("blocked by wall" + isBlockedByWall);
         getDataFromScripts();
 
         cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
@@ -64,17 +64,17 @@ public class HighlightController : MonoBehaviour
     private void setClueStatus(bool isShown)
     {
         showClue = isShown;
-        Debug.Log("Status" + showClue);
+        //Debug.Log("Status" + showClue);
     }
 
 
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
-        GUI.color = new Color32(255, 255, 255, 100);
+        GUI.color = new Color32(255, 255, 255, 25);
         if (isClosestAndSeen)
         {
-            Debug.Log("Drawing");
+            //Debug.Log("Drawing");
             GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
         }
 

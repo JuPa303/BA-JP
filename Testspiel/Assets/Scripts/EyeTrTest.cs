@@ -21,18 +21,11 @@ public class EyeTrTest : GazeMonobehaviour
 
 
 
-    //public void CallEvent(int variable)
-    //{
-    //    //OnShowCue(variable);
-    //}
-
 
     // Use this for initialization
     void Start()
     {
-        //Debug.Log("Screen width " + Screen.width);
-        //Debug.Log("Screen height " + Screen.height);
-        //Debug.Log("calc " + Screen.width/(Screen.dpi/2.54f));
+       // isMouseModusActive = true;
     }
 
 
@@ -41,8 +34,6 @@ public class EyeTrTest : GazeMonobehaviour
     {
         clue = GetComponent<FindClosestClue>().FindClue();
         sample = SMIGazeController.Instance.GetSample();
-
-
         // averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
         gazePos = sample.averagedEye.gazePosInScreenCoords();
 
@@ -56,42 +47,48 @@ public class EyeTrTest : GazeMonobehaviour
 
     private void getGazes()
     {
-        //Debugmode is Active
-        if (!isMouseModusActive)
-        {
-            if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
-            {
 
-                gazePoint1 = sample.averagedEye.eyePosition;
-                hasFirstPoint = true;
 
-            }
-            else
-            {
+             //Debugmode is Active
+             if (isMouseModusActive == false)
+             {
+                 if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
+                 {
 
-                gazePoint2 = sample.averagedEye.eyePosition;
-                //Debug.Log("gazePoint2 " + gazePoint2);
-                calcDirection();
-            }
-        }
+                     gazePoint1 = sample.averagedEye.gazePosInScreenCoords(); 
+                     hasFirstPoint = true;
+                    // Debug.Log("gazePoint2" + gazePoint2);
 
-            //DebugMode
-        else
-        {
-            if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
-            {
 
-                gazePoint1 = Input.mousePosition;
-                hasFirstPoint = true;
+                 }
+                 else
+                 {
+                     gazePoint2 = sample.averagedEye.gazePosInScreenCoords();
+                    // gazePoint2 = sample.averagedEye.eyePosition;
+                     //Debug.Log("gazePoint2 " + gazePoint2);
+                     calcDirection();
+                 }
+             }
 
-            }
-            else
-            {
+                 //DebugMode
+             else
+             {
+                 if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
+                 {
 
-                gazePoint2 = Input.mousePosition;
-                //calcDirection();
-            }
-        }
+                     gazePoint1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                     hasFirstPoint = true;
+                     Debug.Log("mouse pos1" + gazePoint1);
+
+                 }
+                 else
+                 {
+
+                     gazePoint2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                     Debug.Log("mouse pos2" + gazePoint2);
+                     calcDirection();
+                 }
+             }
 
     }
 
@@ -102,26 +99,37 @@ public class EyeTrTest : GazeMonobehaviour
 
 
         Vector3 cluePos3D = clue.transform.position;
-        Vector2 cluePos2D = new Vector2(cluePos3D.x, cluePos3D.y);
+       
+        //Vector2 cluePos2D = new Vector2(cluePos3D.x, cluePos3D.y);
+        //Debug.Log("clue pos" + cluePos2D);
+        Vector2 cluePos2D = Camera.main.WorldToScreenPoint(cluePos3D);
+        //Debug.Log("clue pos World" + cluePos2D);
+        
+
         vectorToClue2D = cluePos2D - gazePoint1;
         vectorToGaze = gazePoint2 - gazePoint1;
 
 
-        float distanceOfGazeVectors = Vector3.Distance(gazePoint1, gazePoint2);
-        float distanceGP1ToClue = Vector3.Distance(gazePoint1, cluePos2D);
-        float distanceGP2ToClue = Vector3.Distance(gazePoint2, cluePos2D);
+        float distanceOfGazeVectors = Vector2.Distance(gazePoint1, gazePoint2);
 
-        if (distanceOfGazeVectors <= 5)
+        float distanceGP1ToClue = Vector2.Distance(gazePoint1, cluePos2D);
+        float distanceGP2ToClue = Vector2.Distance(gazePoint2, cluePos2D);
+
+        Debug.Log("GP1" + gazePoint1);
+        Debug.Log("GP2" + gazePoint2);
+
+        //gazes are too close to get any difference for calculating the direction
+        if (distanceOfGazeVectors <= 15)
         {
             hasFirstPoint = true;
-            //showClue = false;
+            Debug.Log("Skip");
 
         }
         else
         {
-            // Debug.Log("next");
-            angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
-            //Debug.Log("Angle " + angle);
+            //Debug.Log("difference bigger");
+            angle = Vector3.Angle(vectorToClue2D,vectorToGaze);
+            Debug.Log("Angle " + angle);
 
 
             // looking in correct direction -> don't show clue image
@@ -130,19 +138,18 @@ public class EyeTrTest : GazeMonobehaviour
 
                 OnClueStatus(false);
 
-                //Debug.Log("in richtige Richtung");
-                //Debug.Log("GP1" + gazePoint1);
-                //Debug.Log("GP2" + gazePoint2);
+               Debug.Log("in richtige Richtung");
+
                 //Debug.Log("distance" + distanceOfGazeVectors);
 
             }
 
 
-            //if gaze turns away from target
-            if (distanceGP1ToClue > distanceGP2ToClue)
-            {
-                OnClueStatus(true);
-            }
+            ////if gaze turns away from target
+            //if (distanceGP1ToClue > distanceGP2ToClue)
+            //{
+            //    OnClueStatus(true);
+            //}
 
             else
             {
