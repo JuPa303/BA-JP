@@ -193,14 +193,14 @@ public class EyeTrTest : GazeMonobehaviour
 
 
     //draw gaze as rectangle
-    private void OnGUI()
-    {
-        Texture2D square = new Texture2D(20, 20);
-        square.SetPixel(1, 1, Color.white);
-        square.Apply();
-        GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
+    //private void OnGUI()
+    //{
+    //    Texture2D square = new Texture2D(20, 20);
+    //    square.SetPixel(1, 1, Color.white);
+    //    square.Apply();
+    //    GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
 
-    }
+    //}
 
 
 
