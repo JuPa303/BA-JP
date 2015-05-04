@@ -16,6 +16,8 @@ public class EyeTrackerData : GazeMonobehaviour
     private float angle = 0f;
 
 
+
+
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
 
@@ -26,12 +28,14 @@ public class EyeTrackerData : GazeMonobehaviour
     void Start()
     {
         // isMouseModusActive = true;
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
         clue = GetComponent<FindClosestClue>().FindClue();
         sample = SMIGazeController.Instance.GetSample();
         // averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
@@ -39,6 +43,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
         getGazes();
         checkGazeOnObject();
+
         //screenData();
 
     }
@@ -99,13 +104,7 @@ public class EyeTrackerData : GazeMonobehaviour
         //get vectors and distances between gaze points and clue
 
         Vector3 cluePos3D = clue.transform.position;
-
-        //Vector2 cluePos2D = new Vector2(cluePos3D.x, cluePos3D.y);
-        //Debug.Log("clue pos" + cluePos2D);
         Vector2 cluePos2D = Camera.main.WorldToScreenPoint(cluePos3D);
-        //Debug.Log("clue pos World" + cluePos2D);
-
-
         vectorToClue2D = cluePos2D - gazePoint1;
         vectorToGaze = gazePoint2 - gazePoint1;
 
@@ -118,52 +117,49 @@ public class EyeTrackerData : GazeMonobehaviour
         Debug.Log("GP1" + gazePoint1);
         Debug.Log("GP2" + gazePoint2);
 
-        //gazes are too close to get any difference for calculating the direction
-        // number from begaze/experiment center
-        if (distanceOfGazeVectors <= 25)
-        {
-            hasFirstPoint = true;
-            Debug.Log("Skip");
+    
 
-        }
-        else
-        {
-            //Debug.Log("difference bigger");
-            angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
-            Debug.Log("Angle " + angle);
-
-
-            // looking in correct direction -> don't show clue image
-            if (angle <= 20)
+            //gazes are too close to get any difference for calculating the direction, seems to be fixation, keep first point
+            // number from begaze/experiment center
+            if (distanceOfGazeVectors <= 30)
             {
-
-                OnClueStatus(false);
-
-                Debug.Log("in richtige Richtung");
-
-                //Debug.Log("distance" + distanceOfGazeVectors);
+                hasFirstPoint = true;
+                Debug.Log("Skip");
 
             }
 
-
-            ////if gaze turns away from target
-            //if (distanceGP1ToClue > distanceGP2ToClue)
-            //{
-            //    OnClueStatus(true);
-            //}
-
+            //check if angle between gaze vector and clue are small enough, means to be in right direction
             else
             {
 
-                OnClueStatus(true);
+                angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
+                //Debug.Log("Angle " + angle);
+                Debug.LogWarning("Angle " + angle);
+
+
+                // looking in correct direction -> don't show clue image
+                if (angle <= 20)
+                {
+                    OnClueStatus(false);
+                    Debug.Log("in richtige Richtung");
+
+                }
+
+
+
+                //looking in wrong direction, show clue again
+                else
+                {
+
+                    OnClueStatus(true);
+                }
+
+                //resets gazepoints
+                hasFirstPoint = false;
+
             }
-
-            //resets gazepoints
-            hasFirstPoint = false;
-
         }
-
-    }
+    
 
 
     //check if user's gaze is directly on clue
@@ -177,15 +173,19 @@ public class EyeTrackerData : GazeMonobehaviour
             {
                 clue = objectInFocus;
                 OnClueStatus(false);
+                Debug.Log("gaze on clue");
                 
+
             }
-          
+      
+
         }
 
         catch (System.Exception e)
         {
             Debug.Log(e);
         }
+  
 
     }
 
@@ -194,7 +194,7 @@ public class EyeTrackerData : GazeMonobehaviour
     //draw gaze as rectangle
     private void OnGUI()
     {
-        //Texture2D square = new Texture2D(20, 20);
+        //Texture2D square = new Texture2D(10, 10);
         //square.SetPixel(1, 1, Color.white);
         //square.Apply();
         //GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
@@ -204,32 +204,32 @@ public class EyeTrackerData : GazeMonobehaviour
 
 
     //Nur ein Versuch, funktioniert so nicht ganz
-    private void screenData()
-    {
-        Vector2 clueVec = Camera.main.WorldToScreenPoint(clue.transform.position);
-        Vector2 gazeInScreenCoord = Camera.main.WorldToScreenPoint(gazePoint2);
+    //private void screenData()
+    //{
+    //    Vector2 clueVec = Camera.main.WorldToScreenPoint(clue.transform.position);
+    //    Vector2 gazeInScreenCoord = Camera.main.WorldToScreenPoint(gazePoint2);
 
-        //double screenWidthInCm = (Screen.width * 2.54 / 96.0);
-        //double screenHeightInCm = (Screen.height * 2.54 / 96.0);
+    //    //double screenWidthInCm = (Screen.width * 2.54 / 96.0);
+    //    //double screenHeightInCm = (Screen.height * 2.54 / 96.0);
 
-        //calculating 2,5 cm in px
-        double radiusCirclePx = (2.5 * Screen.dpi / 2.54);
-        float distanceOfGaze = Vector2.Distance(gazeInScreenCoord, clueVec);
-        Debug.Log("Distance" + distanceOfGaze);
-        Debug.Log("gaze screen" + gazeInScreenCoord);
-        Debug.Log("clueVec" + clueVec);
-        //Debug.Log("radius" + radiusCirclePx);
+    //    //calculating 2,5 cm in px
+    //    double radiusCirclePx = (2.5 * Screen.dpi / 2.54);
+    //    float distanceOfGaze = Vector2.Distance(gazeInScreenCoord, clueVec);
+    //    Debug.Log("Distance" + distanceOfGaze);
+    //    Debug.Log("gaze screen" + gazeInScreenCoord);
+    //    Debug.Log("clueVec" + clueVec);
+    //    //Debug.Log("radius" + radiusCirclePx);
 
-        if (radiusCirclePx <= distanceOfGaze)
-        {
-            OnClueStatus(false);
-            //Debug.Log("don't show");
-        }
-        else
-        {
-            OnClueStatus(true);
-            //Debug.Log("show");
-        }
-    }
+    //    if (radiusCirclePx <= distanceOfGaze)
+    //    {
+    //        OnClueStatus(false);
+    //        //Debug.Log("don't show");
+    //    }
+    //    else
+    //    {
+    //        OnClueStatus(true);
+    //        //Debug.Log("show");
+    //    }
+    //}
 }
 
