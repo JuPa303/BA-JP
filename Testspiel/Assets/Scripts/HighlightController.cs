@@ -11,7 +11,7 @@ public class HighlightController : MonoBehaviour
 
     private int texUnit = 50; //height & width of texture
 
-    public EyeTrTest eyeTrTest;
+    public EyeTrackerData eyeData;
 
 
 
@@ -21,8 +21,8 @@ public class HighlightController : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        eyeTrTest = player.GetComponent<EyeTrTest>();
-        eyeTrTest.OnClueStatus += setClueStatus;
+        eyeData = player.GetComponent<EyeTrackerData>();
+        eyeData.OnClueStatus += setClueStatus;
 
         getDataFromScripts();
 
@@ -71,7 +71,7 @@ public class HighlightController : MonoBehaviour
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
-        GUI.color = new Color32(255, 255, 255, 25);
+        GUI.color = new Color32(255, 255, 255, 10);
         if (isClosestAndSeen)
         {
             //Debug.Log("Drawing");
