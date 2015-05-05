@@ -71,7 +71,7 @@ public class HighlightController : MonoBehaviour
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
-        GUI.color = new Color32(255, 255, 255, 10);
+        GUI.color = new Color32(255, 255, 255, 15);
         if (isClosestAndSeen)
         {
             //Debug.Log("Drawing");

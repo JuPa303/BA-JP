@@ -114,8 +114,8 @@ public class EyeTrackerData : GazeMonobehaviour
         float distanceGP1ToClue = Vector2.Distance(gazePoint1, cluePos2D);
         float distanceGP2ToClue = Vector2.Distance(gazePoint2, cluePos2D);
 
-        Debug.Log("GP1" + gazePoint1);
-        Debug.Log("GP2" + gazePoint2);
+        //Debug.Log("GP1" + gazePoint1);
+        //Debug.Log("GP2" + gazePoint2);
 
     
 
@@ -124,7 +124,7 @@ public class EyeTrackerData : GazeMonobehaviour
             if (distanceOfGazeVectors <= 30)
             {
                 hasFirstPoint = true;
-                Debug.Log("Skip");
+                //Debug.Log("Skip");
 
             }
 
@@ -134,14 +134,14 @@ public class EyeTrackerData : GazeMonobehaviour
 
                 angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
                 //Debug.Log("Angle " + angle);
-                Debug.LogWarning("Angle " + angle);
+               // Debug.LogWarning("Angle " + angle);
 
 
                 // looking in correct direction -> don't show clue image
                 if (angle <= 20)
                 {
                     OnClueStatus(false);
-                    Debug.Log("in richtige Richtung");
+                    //Debug.Log("in richtige Richtung");
 
                 }
 
@@ -173,7 +173,7 @@ public class EyeTrackerData : GazeMonobehaviour
             {
                 clue = objectInFocus;
                 OnClueStatus(false);
-                Debug.Log("gaze on clue");
+                //Debug.Log("gaze on clue");
                 
 
             }
