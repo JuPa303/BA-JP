@@ -15,7 +15,7 @@ public class MapCamera : MonoBehaviour {
 
         if (showMap == true)
         {
-            Debug.Log("show map true");
+            //Debug.Log("show map true");
             //Camera..enabled = true;
             //enabled = true;
             gameObject.GetComponent<Camera>().enabled = true;
@@ -24,7 +24,7 @@ public class MapCamera : MonoBehaviour {
 
         else
         {
-            Debug.Log("show map false");
+            //Debug.Log("show map false");
             gameObject.GetComponent<Camera>().enabled = false;
             //Camera.this.enabled = false;
           //enabled = false;

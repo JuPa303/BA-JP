@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
 
         if (systemNumber == 2)
         {
-            Debug.Log("Compass");
+            //Debug.Log("Compass");
             //just compass scripts are enabled
         }
 
