@@ -25,21 +25,19 @@ public class Compass : MonoBehaviour
     {
 
         Vector2 targetPos = Camera.main.WorldToScreenPoint(target.transform.position);
-        Vector2 arrowPos = targetPos;
-        Debug.Log("arrowPos.x" + arrowPos);
-
-
+        Debug.Log("Target" +targetPos);
        
+        Vector2 arrowPos = targetPos;
+        //Debug.Log("arrowPos.x" + arrowPos);
 
-      
-    
+
 
         if (arrowPos.y < 0)
         {
             arrowPos.y = threshold;
         }
 
-        if (arrowPos.y+ tex.height > Screen.height)
+        if (arrowPos.y + tex.height > Screen.height)
         {
             arrowPos.y = Screen.height - threshold - tex.height;
         }
@@ -49,18 +47,18 @@ public class Compass : MonoBehaviour
             arrowPos.x = threshold;
         }
 
-        if (arrowPos.x+ tex.width > Screen.width)
+        if (arrowPos.x + tex.width > Screen.width)
         {
-            arrowPos.x = Screen.width - threshold - tex.width; //hat keinen Einfluss
+            arrowPos.x = Screen.width - threshold - tex.width;
         }
 
         //dir.y = Screen.height - dir.y;
 
         rect.x = arrowPos.x;
         rect.y = arrowPos.y;
-        //Vector3 screenCenter = new Vector3 (Screen.width, Screen.height, 0 / 2);
 
-        //Vector3 screenBounds = screenCenter * 0.9f;
+        Debug.Log("rect" + rect);
+       
 
         //Debug.Log("rect" + rect.position);
         //Debug.Log("screen" + rect.position);
@@ -69,10 +67,9 @@ public class Compass : MonoBehaviour
         //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //Debug.Log("angle" + angle);
 
-        //var matrixBackup = GUI.matrix;
         //GUIUtility.RotateAroundPivot(angle, pivot);
         GUI.DrawTexture(rect, tex);
-        //GUI.matrix = matrixBackup;
+      
 
     }
 }
