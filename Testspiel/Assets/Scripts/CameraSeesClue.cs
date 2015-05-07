@@ -23,16 +23,16 @@ public class CameraSeesClue : MonoBehaviour
 
         RaycastHit hit;
 
-       
+
         //Debug.DrawRay(transform.position, direction, Color.green);
-        
+
         // Calculate Ray direction
         //direction = Camera.main.transform.position - transform.position;
         if (Physics.Raycast(transform.position, direction, out hit))
         {
-  
 
-            if (hit.collider.tag == "Player" ) //hit something else before the camera
+
+            if (hit.collider.tag == "Player") //hit something else before the camera
             {
 
                 return false;

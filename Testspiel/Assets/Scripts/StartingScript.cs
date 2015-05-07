@@ -6,7 +6,7 @@ public class StartingScript : MonoBehaviour
 {
 
     private Button playButton;
-    private bool nothingToggled = true;
+    //private bool nothingToggled = true;
     private GameObject menue;
     private GameObject player;
     private GameObject eyeTracker;
@@ -25,7 +25,7 @@ public class StartingScript : MonoBehaviour
         getComponents();
         setScriptsDisabled();
 
-    
+
     }
 
     // Update is called once per frame
@@ -71,12 +71,12 @@ public class StartingScript : MonoBehaviour
     {
         if (system != 3)
         {
-            Debug.Log("sys 1"+system);
+
             gameControlObj.GetComponent<GameController>().systemNumber = system;
 
-            Debug.Log("sys2 " + gameControlObj.GetComponent<GameController>().systemNumber);
+
             firstpersoncontroller.enabled = true;
-           
+
 
             if (system == 0)
             {

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\HighlightController.cs" />
      <Compile Include="Assets\Scripts\MapCamera.cs" />
+     <Compile Include="Assets\Scripts\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\StartingScript.cs" />
      <None Include="Assets\Standard Assets\Shader\AlphaBlending.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
