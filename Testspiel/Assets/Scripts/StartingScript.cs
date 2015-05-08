@@ -12,6 +12,7 @@ public class StartingScript : MonoBehaviour
     private GameObject eyeTracker;
     private GameObject clues;
     private GameObject gameControlObj;
+    private GameObject compass;
     private int system = 3;
     private FirstPersonController firstpersoncontroller;
 
@@ -40,7 +41,8 @@ public class StartingScript : MonoBehaviour
         gameControlObj = GameObject.Find("GameControl");
         player = GameObject.FindGameObjectWithTag("Player");
         eyeTracker = GameObject.FindGameObjectWithTag("GazeController");
-        //clues = GameObject.Find("Clues");
+        compass = GameObject.FindGameObjectWithTag("Compass");
+
         firstpersoncontroller = player.GetComponent<FirstPersonController>();
 
     }
@@ -52,6 +54,7 @@ public class StartingScript : MonoBehaviour
         firstpersoncontroller.enabled = false;
         //clues.SetActive(false);
         eyeTracker.SetActive(false);
+        compass.SetActive(false);
     }
 
 
@@ -59,7 +62,6 @@ public class StartingScript : MonoBehaviour
     public void setSystem(int sysNumber)
     {
 
-        Debug.Log("sysNumber" + sysNumber);
         system = sysNumber;
 
 
@@ -83,18 +85,12 @@ public class StartingScript : MonoBehaviour
                 eyeTracker.SetActive(true);
             }
 
+            if (system == 2)
+            {
+                compass.SetActive(true);
+            }
             menue.SetActive(false);
 
-            // one system has to be toggled
-            //if (system != 3)
-            //{
-            //    menue.SetActive(false);
-            //    firstpersoncontroller.enabled = true;
-
-            //}
-            //else{
-            // do nothing
-            //}
 
         }
 

@@ -6,8 +6,11 @@ public class Compass : MonoBehaviour
 
     private GameObject target;
     // Use this for initialization
-    public Texture2D tex;    // Texture to be rotated
-    public Vector2 pivot;    // Where to place the center of the texture
+    public Texture2D arrowUp;
+    public Texture2D arrowLeft;
+    public Texture2D arrowRight;
+    public Texture2D arrowDown;
+    // public Vector2 pivot;    // Where to place the center of the texture
 
     private Rect rect;
 
@@ -16,6 +19,13 @@ public class Compass : MonoBehaviour
     private float thresholdOutside = 10.0f;
     private float thresholdInside = 50.0f;
 
+    private Vector3 arrowPos;
+
+    private float currentNumber;
+    //private float maximum;
+    private bool hasPos = false;
+    private float texHeight; //tex is square
+
 
 
 
@@ -23,27 +33,24 @@ public class Compass : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Target");
         //pivot = new Vector2(Screen.width / 2, Screen.height / 2);
-        rect = new Rect(Screen.width / 2, Screen.height / 2, tex.width / 2, tex.height / 2);
+        texHeight = arrowUp.height;
+        rect = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, texHeight * 0.3f, texHeight * 0.3f);
 
-        // rect = new Rect(pivot.x - tex.width * 0.5f, pivot.y - tex.height * 0.5f, tex.width, tex.height);
-        // rect = new Rect(pivot.x - 100, pivot.y - 100, tex.width, tex.height);
-
-        Debug.Log("width" + Screen.width);
     }
 
     void OnGUI()
     {
         getArrowPos();
-
-
     }
+
+
 
     private void getArrowPos()
     {
         Vector3 targetPos = Camera.main.WorldToScreenPoint(target.transform.position);
-        Vector3 arrowPos = targetPos;
+        arrowPos = targetPos;
         arrowPos.y = Screen.height - arrowPos.y;
-        Debug.Log("arrow" + arrowPos);
+        //Debug.Log("arrow" + arrowPos);
 
         //if camera is facing towards the target
         if (targetPos.z > 0)
@@ -57,7 +64,7 @@ public class Compass : MonoBehaviour
 
 
             //down outside
-            if (arrowPos.y + tex.height > Screen.height - thresholdOutside)
+            if (arrowPos.y + arrowUp.height > Screen.height - thresholdOutside)
             {
                 arrowPos.y = Screen.height - thresholdOutside;
             }
@@ -70,64 +77,130 @@ public class Compass : MonoBehaviour
             }
 
 
-
             //right outside
-            if (arrowPos.x + tex.width > Screen.width)
+            if (arrowPos.x + texHeight > Screen.width)
             {
-                arrowPos.x = Screen.width - thresholdOutside - tex.width;
+                arrowPos.x = Screen.width - thresholdOutside - texHeight;
             }
 
 
             //up inside
             if (arrowPos.y > thresholdInside && arrowPos.x < Screen.width - thresholdInside)
             {
-                Debug.Log("Screen.width- thresholdInside" + (Screen.width - thresholdInside));
-                Debug.Log("x" + arrowPos.x);
+                Debug.Log("Mitte");
+
                 //right inside
-                if ((arrowPos.x + tex.width) >= (Screen.width - thresholdInside))
+                if ((arrowPos.x + texHeight) >= (Screen.width - thresholdInside))
                 {
-                    Debug.Log("rechte Ecke");
+                    // Debug.Log("rechte Ecke");
+                    drawArrow(arrowRight);
 
                 }
 
                 //left inside
                 else if (arrowPos.x <= thresholdInside)
                 {
-                    Debug.Log("linke ecke" + arrowPos.x);
+                    // Debug.Log("linke ecke" + arrowPos.x);
+                    drawArrow(arrowLeft);
                 }
 
                 else
                 {
 
                     arrowPos.y = thresholdInside;
+                    drawArrow(arrowUp);
                 }
 
 
             }
 
 
-            rect.x = arrowPos.x;
-            rect.y = arrowPos.y;
+            //rect.x = arrowPos.x;
+            //rect.y = arrowPos.y;
 
-            GUI.DrawTexture(rect, tex);
+            //GUI.DrawTexture(rect, arrowUp);
+            //drawArrow(arrowUp);
+
 
 
         }
         //if camera is not facing towards the target
         else
         {
+            checkArrowPosBehindPlayer();
 
-            arrowPos.x = Screen.width / 2;
-            arrowPos.y = Screen.height - tex.height;
-
-
-            rect.x = arrowPos.x;
-            rect.y = arrowPos.y;
-
-            GUI.DrawTexture(rect, tex);
         }
 
     }
 
+    private void checkArrowPosBehindPlayer()
+    {
+
+        if (hasPos == false)
+        {
+            arrowPos.x = Screen.width / 2;
+            arrowPos.y = Screen.height - texHeight;
+            currentNumber = arrowPos.z;
+            hasPos = true;
+
+        }
+
+        else
+        {
+            if ((arrowPos.x >= thresholdInside) && (arrowPos.y < Screen.height) && (arrowPos.x <= (Screen.width - thresholdInside - texHeight)))
+            {
+                Debug.Log("Mitte unten");
+
+
+                if (arrowPos.z < currentNumber)
+                {
+                    currentNumber = arrowPos.z;
+                    hasPos = true;
+                    //Debug.Log("werte werden kleiner");
+                    arrowPos.x = arrowPos.x - 10;
+                    arrowPos.y = Screen.height - texHeight;
+                    drawArrow(arrowDown);
+
+                }
+                else
+                {
+                    //currentNumber = arrowPos.z;
+                    //Werte werden größer
+                    // Debug.Log("werte werden größer");
+                    arrowPos.x = arrowPos.x + 10;
+                    arrowPos.y = Screen.height - texHeight;
+                    drawArrow(arrowDown);
+
+                }
+            }
+
+            //left outside
+            else if (arrowPos.x < 0)
+            {
+                arrowPos.x = thresholdOutside;
+                drawArrow(arrowLeft);
+            }
+
+
+
+            //right outside
+            else if (arrowPos.x + texHeight > Screen.width)
+            {
+                arrowPos.x = Screen.width - thresholdOutside - texHeight;
+                Debug.Log("draw right arrow");
+                drawArrow(arrowRight);
+            }
+        }
+
+    }
+
+    private void drawArrow(Texture2D arrow)
+    {
+
+        rect.x = arrowPos.x;
+        rect.y = arrowPos.y;
+        GUI.DrawTexture(rect, arrow);
+
+    }
 }
 
