@@ -83,11 +83,13 @@ public class StartingScript : MonoBehaviour
             if (system == 0)
             {
                 eyeTracker.SetActive(true);
+                eyeTracker.GetComponent<EyeTrackerData>().isChosen = true;
             }
 
             if (system == 2)
             {
                 compass.SetActive(true);
+                compass.GetComponent<Compass>().isChosen = true; 
             }
             menue.SetActive(false);
 

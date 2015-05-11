@@ -15,7 +15,11 @@ public class EyeTrackerData : GazeMonobehaviour
     private bool hasFirstPoint = false;
     private float angle = 0f;
 
+    public bool hasToWait = false;
 
+    public bool isChosen;
+
+    
 
 
     public delegate void cueHandler(bool isShown);
@@ -35,24 +39,26 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (isChosen == true) { 
         clue = GetComponent<FindClosestClue>().FindClue();
         sample = SMIGazeController.Instance.GetSample();
-        // averageGazePosition = sample.averagedEye.gazePosInUnityScreenCoords();
         gazePos = sample.averagedEye.gazePosInScreenCoords();
 
         getGazes();
         checkGazeOnObject();
 
         //screenData();
-
+    }
     }
 
 
 
     private void getGazes()
     {
-
+        if (hasToWait == true)
+        {
+            StartCoroutine(wait());
+        }
 
         //Debugmode is Active
         if (isMouseModusActive == false)
@@ -117,49 +123,46 @@ public class EyeTrackerData : GazeMonobehaviour
         //Debug.Log("GP1" + gazePoint1);
         //Debug.Log("GP2" + gazePoint2);
 
-    
 
-            //gazes are too close to get any difference for calculating the direction, seems to be fixation, keep first point
-            // number from begaze/experiment center
-            if (distanceOfGazeVectors <= 30)
+
+        //gazes are too close to get any difference for calculating the direction, seems to be fixation, keep first point
+        // number from begaze/experiment center
+        if (distanceOfGazeVectors <= 30)
+        {
+            hasFirstPoint = true;
+            //Debug.Log("Skip");
+
+        }
+
+        //check if angle between gaze vector and clue are small enough, means to be in right direction
+        else
+        {
+
+            angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
+
+
+            // looking in correct direction -> don't show clue image
+            if (angle <= 20)
             {
-                hasFirstPoint = true;
-                //Debug.Log("Skip");
+                OnClueStatus(false);
+                //Debug.Log("in richtige Richtung");
 
             }
 
-            //check if angle between gaze vector and clue are small enough, means to be in right direction
+
+            //looking in wrong direction, show clue again
             else
             {
 
-                angle = Vector3.Angle(vectorToClue2D, vectorToGaze);
-                //Debug.Log("Angle " + angle);
-               // Debug.LogWarning("Angle " + angle);
-
-
-                // looking in correct direction -> don't show clue image
-                if (angle <= 20)
-                {
-                    OnClueStatus(false);
-                    //Debug.Log("in richtige Richtung");
-
-                }
-
-
-
-                //looking in wrong direction, show clue again
-                else
-                {
-
-                    OnClueStatus(true);
-                }
-
-                //resets gazepoints
-                hasFirstPoint = false;
-
+                OnClueStatus(true);
             }
+
+            //resets gazepoints
+            hasFirstPoint = false;
+
         }
-    
+    }
+
 
 
     //check if user's gaze is directly on clue
@@ -174,18 +177,15 @@ public class EyeTrackerData : GazeMonobehaviour
                 clue = objectInFocus;
                 OnClueStatus(false);
                 //Debug.Log("gaze on clue");
-                
 
             }
-      
-
         }
 
         catch (System.Exception e)
         {
             Debug.Log(e);
         }
-  
+
 
     }
 
@@ -201,7 +201,12 @@ public class EyeTrackerData : GazeMonobehaviour
 
     }
 
+    public IEnumerator wait()
+    {
 
+        yield return new WaitForSeconds(3f); // waits 3 seconds
+        hasToWait = false;
+    }
 
     //Nur ein Versuch, funktioniert so nicht ganz
     //private void screenData()
