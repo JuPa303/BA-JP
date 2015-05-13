@@ -46,8 +46,9 @@ public class EyeTrackerData : GazeMonobehaviour
 
         getGazes();
         checkGazeOnObject();
+        isChosen = false;
 
-        //screenData();
+       
     }
     }
 

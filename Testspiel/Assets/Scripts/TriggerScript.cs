@@ -5,7 +5,7 @@ public class TriggerScript : MonoBehaviour
 {
 
     private GameObject compass;
-    
+
     private int countSameTrigger = 0;
     private string currentCollider = "Start";
     private string nextCollider;
@@ -14,6 +14,9 @@ public class TriggerScript : MonoBehaviour
     EyeTrackerData eyetrackerScript;
     Compass compassScript;
 
+    private int ID;
+
+
 
     // Use this for initialization
     void Start()
@@ -21,7 +24,7 @@ public class TriggerScript : MonoBehaviour
         eyetrackerScript = GetComponent<EyeTrackerData>();
         compass = GameObject.FindGameObjectWithTag("Compass");
         compassScript = compass.GetComponent<Compass>();
-       
+
     }
 
     // Update is called once per frame
@@ -30,20 +33,28 @@ public class TriggerScript : MonoBehaviour
 
     }
 
+    //if collider triggers something, compass will be set on a new target, sgd is supposed to wait 
     private void OnTriggerEnter(Collider collider)
     {
         
-        if(collider.tag == "Player")
+        if (collider.tag == "Player")
         {
+
+
+
+           // ID = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID;
+            Debug.Log("ID" + ID);
             countSameTrigger++;
             Debug.Log("count " + countSameTrigger);
-            if ((countSameTrigger%2) == 0)
+
+            //if player touches same trigger more times, there is a counter which detects the direction of the player
+            if ((countSameTrigger % 2) == 0)
             {
                 Debug.Log("wrong direction");
-                decreaseCounter();             
-             
+                decreaseCounter();
+
             }
-            
+
             //showing new target
             //if it is not the same collider as the one triggered before, then set the next one as target (user is not turning around)
             //no counting up
@@ -51,12 +62,12 @@ public class TriggerScript : MonoBehaviour
             {
                 Debug.Log("right direction");
                 increaseCounter();
-                
-                
+
+
             }
-           
-           compassScript.target = GameObject.Find("RoomTrigger" + GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID);
-           Debug.Log("target" + compassScript.target);
+
+            compassScript.target = GameObject.Find("RoomTrigger" + GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID);
+            Debug.Log("target" + compassScript.target);
         }
     }
 
@@ -65,16 +76,33 @@ public class TriggerScript : MonoBehaviour
 
     private void increaseCounter()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID++;
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID <= 5)
+        {
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID++;
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID = 5;
+        }
+
     }
 
     private void decreaseCounter()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID--;
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID >= 0)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID--;
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID = 0;
+        }
+
     }
 
-        //soll sagen, dass raum betreten wurde(sgd)
+    //soll sagen, dass raum betreten wurde(sgd)
 
-        //Eyetrackerdata start: wait 4s: liegt auf player -> nur einmal aufgerufen, sollte vor jedem neuen raum warten, bei getgazes?? bool setzen 
+    //Eyetrackerdata start: wait 4s: liegt auf player -> nur einmal aufgerufen, sollte vor jedem neuen raum warten, bei getgazes?? bool setzen 
 
 }
