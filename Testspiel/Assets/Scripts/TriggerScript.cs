@@ -43,7 +43,7 @@ public class TriggerScript : MonoBehaviour
 
 
            // ID = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID;
-            Debug.Log("ID" + ID);
+            
             countSameTrigger++;
             Debug.Log("count " + countSameTrigger);
 
@@ -83,14 +83,14 @@ public class TriggerScript : MonoBehaviour
         }
         else
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID = 5;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID = 6;
         }
 
     }
 
     private void decreaseCounter()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID >= 0)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID > 0)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID--;
         }
