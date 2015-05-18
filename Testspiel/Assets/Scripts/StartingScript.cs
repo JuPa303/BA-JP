@@ -53,7 +53,7 @@ public class StartingScript : MonoBehaviour
         Camera.main.GetComponent<HighlightController>().enabled = false;
         firstpersoncontroller.enabled = false;
         //clues.SetActive(false);
-        eyeTracker.SetActive(false);
+        //eyeTracker.SetActive(false);
         compass.SetActive(false);
     }
 
@@ -82,16 +82,25 @@ public class StartingScript : MonoBehaviour
 
             if (system == 0)
             {
+                menue.SetActive(false);
                 eyeTracker.SetActive(true);
-                eyeTracker.GetComponent<EyeTrackerData>().isChosen = true;
+                player.GetComponent<EyeTrackerData>().isChosen = true;
+
             }
 
-            if (system == 2)
+            else if (system == 2)
             {
+                menue.SetActive(false);
                 compass.SetActive(true);
-                compass.GetComponent<Compass>().isChosen = true; 
+                compass.GetComponent<Compass>().isChosen = true;
+
             }
-            menue.SetActive(false);
+            else
+            {
+                menue.SetActive(false);
+            }
+
+
 
 
         }

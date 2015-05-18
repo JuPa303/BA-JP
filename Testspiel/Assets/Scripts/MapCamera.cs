@@ -1,33 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MapCamera : MonoBehaviour {
+public class MapCamera : MonoBehaviour
+{
 
     public bool showMap;
-	// Use this for initialization
-	void Start () {
-	
+    // Use this for initialization
+    void Start()
+    {
+
         showMap = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (showMap == true)
         {
-            //Debug.Log("show map true");
-            //Camera..enabled = true;
-            //enabled = true;
+
             gameObject.GetComponent<Camera>().enabled = true;
+            gameObject.GetComponent<Camera>().pixelRect = new Rect(Screen.width - 250, 50, 200, 200);
 
         }
 
         else
         {
-            //Debug.Log("show map false");
             gameObject.GetComponent<Camera>().enabled = false;
-            //Camera.this.enabled = false;
-          //enabled = false;
+
         }
-	}
+    }
 }

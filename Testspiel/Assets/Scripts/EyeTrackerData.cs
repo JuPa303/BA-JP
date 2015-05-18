@@ -19,7 +19,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public bool isChosen;
 
-    
+
 
 
     public delegate void cueHandler(bool isShown);
@@ -39,17 +39,19 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isChosen == true) { 
-        clue = GetComponent<FindClosestClue>().FindClue();
-        sample = SMIGazeController.Instance.GetSample();
-        gazePos = sample.averagedEye.gazePosInScreenCoords();
-
-        getGazes();
-        checkGazeOnObject();
-        isChosen = false;
-
        
-    }
+        if (isChosen == true)
+        {
+            clue = GetComponent<FindClosestClue>().FindClue();
+            sample = SMIGazeController.Instance.GetSample();
+            gazePos = sample.averagedEye.gazePosInScreenCoords();
+
+            getGazes();
+            checkGazeOnObject();
+         
+
+
+        }
     }
 
 
@@ -58,7 +60,9 @@ public class EyeTrackerData : GazeMonobehaviour
     {
         if (hasToWait == true)
         {
+
             StartCoroutine(wait());
+            hasToWait = false;
         }
 
         //Debugmode is Active
@@ -118,8 +122,8 @@ public class EyeTrackerData : GazeMonobehaviour
 
         float distanceOfGazeVectors = Vector2.Distance(gazePoint1, gazePoint2);
 
-        float distanceGP1ToClue = Vector2.Distance(gazePoint1, cluePos2D);
-        float distanceGP2ToClue = Vector2.Distance(gazePoint2, cluePos2D);
+        //float distanceGP1ToClue = Vector2.Distance(gazePoint1, cluePos2D);
+        //float distanceGP2ToClue = Vector2.Distance(gazePoint2, cluePos2D);
 
         //Debug.Log("GP1" + gazePoint1);
         //Debug.Log("GP2" + gazePoint2);
@@ -204,9 +208,12 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public IEnumerator wait()
     {
-
+        Debug.Log("wait");
+        OnClueStatus(false);
         yield return new WaitForSeconds(3f); // waits 3 seconds
-        hasToWait = false;
+       
+        Debug.Log("wait end");
+       
     }
 
     //Nur ein Versuch, funktioniert so nicht ganz

@@ -71,7 +71,7 @@ public class HighlightController : MonoBehaviour
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
-        GUI.color = new Color32(255, 255, 255, 15);
+        GUI.color = new Color32(255, 255, 255, 12);
         if (isClosestAndSeen)
         {
             //Debug.Log("Drawing");
@@ -84,8 +84,6 @@ public class HighlightController : MonoBehaviour
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
-        //showClue = player.GetComponent<EyeTrTest>().showClue;
-        //Debug.Log("showClue controller" + showClue);
 
     }
 }
