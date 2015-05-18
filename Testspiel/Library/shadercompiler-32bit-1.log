@@ -1,7 +1,49 @@
 Base path: C:/Program Files (x86)/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-32bit-1-9080
+Pipe name: \\.\pipe\UnityShaderCompiler-32bit-1-12888
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=2379 outsize=1092 ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=959 outsize=1071 kw= ok=1
+  api=4 type=0 insize=1589 outsize=1274 kw=SOFTPARTICLES_OFF ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=959 outsize=600 kw= ok=1
+  api=4 type=1 insize=1589 outsize=908 kw=SOFTPARTICLES_OFF ok=1
+Cmd: preprocess
+  insize=2237 outsize=975 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1561 outsize=1274 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1561 outsize=852 kw=SOFTPARTICLES_OFF ok=1
+Cmd: preprocess
+  insize=2274 outsize=1036 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1537 outsize=1274 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1537 outsize=908 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1482 outsize=1274 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1482 outsize=933 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1705 outsize=2022 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1705 outsize=1599 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1642 outsize=2022 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1642 outsize=1599 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1482 outsize=2022 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1482 outsize=1656 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3647 outsize=2737 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3647 outsize=2428 kw=SPOT ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=938 outsize=4711 kw=SPOT SHADOWS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=938 outsize=6385 kw=SPOT SHADOWS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10255 outsize=2818 kw=WATER_EDGEBLEND_ON WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10255 outsize=5751 kw=WATER_EDGEBLEND_ON WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF ok=1
