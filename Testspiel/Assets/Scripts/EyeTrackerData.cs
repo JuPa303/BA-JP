@@ -32,6 +32,7 @@ public class EyeTrackerData : GazeMonobehaviour
     void Start()
     {
         // isMouseModusActive = true;
+        OnClueStatus(false);
 
     }
 
@@ -39,31 +40,42 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         if (isChosen == true)
         {
             clue = GetComponent<FindClosestClue>().FindClue();
             sample = SMIGazeController.Instance.GetSample();
             gazePos = sample.averagedEye.gazePosInScreenCoords();
 
-            getGazes();
-            checkGazeOnObject();
-         
+            //getGazes();
+            //checkGazeOnObject();
+
+            if (hasToWait == true)
+            {
+                OnClueStatus(false);
+                StartCoroutine(wait());
+
+            }
+            else
+            {
+                getGazes();
+                checkGazeOnObject();
+            }
 
 
         }
     }
 
+    public IEnumerator wait()
+    {
 
+        yield return new WaitForSeconds(4f); // waits 4 seconds
+        hasToWait = false;
+
+    }
 
     private void getGazes()
     {
-        if (hasToWait == true)
-        {
-
-            StartCoroutine(wait());
-            hasToWait = false;
-        }
 
         //Debugmode is Active
         if (isMouseModusActive == false)
@@ -206,15 +218,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     }
 
-    public IEnumerator wait()
-    {
-        Debug.Log("wait");
-        OnClueStatus(false);
-        yield return new WaitForSeconds(3f); // waits 3 seconds
-       
-        Debug.Log("wait end");
-       
-    }
+
 
     //Nur ein Versuch, funktioniert so nicht ganz
     //private void screenData()
