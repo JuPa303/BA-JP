@@ -23,6 +23,7 @@ public class StartingScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         getComponents();
         setScriptsDisabled();
 
@@ -73,6 +74,9 @@ public class StartingScript : MonoBehaviour
     {
         if (system != 3)
         {
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
             gameControlObj.GetComponent<GameController>().systemNumber = system;
 
