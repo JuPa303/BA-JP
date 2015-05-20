@@ -99,9 +99,11 @@ public class StartingScript : MonoBehaviour
 
             else if (system == 2)
             {
-                menue.SetActive(false);
-                compass.SetActive(true);
-                compass.GetComponent<Compass>().isChosen = true;
+                Application.LoadLevel("Compass");
+
+                //menue.SetActive(false);
+                //compass.SetActive(true);
+                //compass.GetComponent<Compass>().isChosen = true;
 
             }
             else

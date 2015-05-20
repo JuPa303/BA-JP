@@ -42,10 +42,10 @@ public class Compass : MonoBehaviour
 
     void OnGUI()
     {
-        if (isChosen == true)
-        {
-            getArrowPos();
-        }
+        //if (isChosen == true)
+        //{
+           getArrowPos();
+        //}
     }
 
 
