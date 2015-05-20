@@ -14,7 +14,7 @@ public class MapCamera : MonoBehaviour
     void Start()
     {
         mapCamera = gameObject.GetComponent<Camera>();
-        showMap = false;
+       // showMap = false;
         player = GameObject.FindGameObjectWithTag("Player");
 
     }
@@ -23,19 +23,19 @@ public class MapCamera : MonoBehaviour
     void Update()
     {
 
-        if (showMap == true)
-        {
+        //if (showMap == true)
+        //{
 
             mapCamera.enabled = true;
             mapCamera.pixelRect = new Rect(Screen.width - 300, 50, 270,270);
 
-        }
+        //}
 
-        else
-        {
-            mapCamera.enabled = false;
+        //else
+        //{
+        //    mapCamera.enabled = false;
 
-        }
+        //}
     }
 
     void OnGUI()

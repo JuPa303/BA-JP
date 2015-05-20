@@ -91,6 +91,11 @@ public class StartingScript : MonoBehaviour
                 player.GetComponent<EyeTrackerData>().isChosen = true;
 
             }
+            else if (system == 1)
+            {
+                Application.LoadLevel("MiniMap");
+            }
+
 
             else if (system == 2)
             {
