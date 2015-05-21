@@ -6,11 +6,13 @@ public class MinimapEnd : MonoBehaviour {
 
     private int system =3;
     private GameObject end;
+    private GameObject player;
 
     // Use this for initialization
     void Start()
     {
         end = GameObject.FindGameObjectWithTag("End");
+        player = GameObject.FindGameObjectWithTag("Player");
         end.SetActive(false);
     }
 
@@ -30,7 +32,7 @@ public class MinimapEnd : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider collider)
     {
-
+        player.GetComponent<FirstPersonController>().enabled = false;
         end.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

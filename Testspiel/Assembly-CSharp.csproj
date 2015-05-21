@@ -47,18 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\PlayerManager.cs" />
-     <Compile Include="Assets\Scripts\CameraSeesClue.cs" />
-     <Compile Include="Assets\Scripts\Compass.cs" />
-     <Compile Include="Assets\Scripts\CompassEnd.cs" />
-     <Compile Include="Assets\Scripts\EyeTrackerData.cs" />
-     <Compile Include="Assets\Scripts\FindClosestClue.cs" />
+     <Compile Include="Assets\Scripts\Compass\Compass.cs" />
+     <Compile Include="Assets\Scripts\Compass\CompassEnd.cs" />
      <Compile Include="Assets\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\HighlightController.cs" />
-     <Compile Include="Assets\Scripts\MapCamera.cs" />
-     <Compile Include="Assets\Scripts\MinimapEnd.cs" />
+     <Compile Include="Assets\Scripts\MiniMap\MapCamera.cs" />
+     <Compile Include="Assets\Scripts\MiniMap\MinimapEnd.cs" />
      <Compile Include="Assets\Scripts\RoomEnter.cs" />
-     <Compile Include="Assets\Scripts\SDGend.cs" />
+     <Compile Include="Assets\Scripts\SGD\CameraSeesClue.cs" />
+     <Compile Include="Assets\Scripts\SGD\EyeTrackerData.cs" />
+     <Compile Include="Assets\Scripts\SGD\FindClosestClue.cs" />
+     <Compile Include="Assets\Scripts\SGD\HighlightController.cs" />
+     <Compile Include="Assets\Scripts\SGD\SDGend.cs" />
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\StartingScript.cs" />
      <Compile Include="Assets\Scripts\TriggerScript.cs" />

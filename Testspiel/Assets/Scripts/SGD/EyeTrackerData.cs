@@ -19,11 +19,11 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public bool isChosen;
 
-
-
-
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
+
+    int calibrationType = 5;
+    private bool didCalibration = false;
 
 
 
@@ -32,7 +32,10 @@ public class EyeTrackerData : GazeMonobehaviour
     void Start()
     {
         // isMouseModusActive = true;
+        Debug.Log("EyeTrackerData");
         OnClueStatus(false);
+
+        
 
     }
 
@@ -43,6 +46,9 @@ public class EyeTrackerData : GazeMonobehaviour
 
         if (isChosen == true)
         {
+
+            calibrateET();
+
             clue = GetComponent<FindClosestClue>().FindClue();
             sample = SMIGazeController.Instance.GetSample();
             gazePos = sample.averagedEye.gazePosInScreenCoords();
@@ -69,9 +75,19 @@ public class EyeTrackerData : GazeMonobehaviour
     public IEnumerator wait()
     {
 
-        yield return new WaitForSeconds(4f); // waits 4 seconds
+        yield return new WaitForSeconds(3f); // waits 3 seconds
         hasToWait = false;
 
+    }
+
+    private void calibrateET()
+    {
+        if (didCalibration == false)
+        {
+            SMIGazeController.Instance.StartCalibration(calibrationType);
+            didCalibration = true;
+        }
+     
     }
 
     private void getGazes()

@@ -18,7 +18,7 @@ public class HighlightController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Debug.Log("HighlightController");
         player = GameObject.FindGameObjectWithTag("Player");
 
         eyeData = player.GetComponent<EyeTrackerData>();
@@ -33,7 +33,7 @@ public class HighlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("blocked by wall" + isBlockedByWall);
+        
         getDataFromScripts();
 
         cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);

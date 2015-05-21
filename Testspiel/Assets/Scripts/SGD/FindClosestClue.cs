@@ -8,7 +8,7 @@ public class FindClosestClue : MonoBehaviour
 
     private void Start()
     {
-
+        Debug.Log("FindClosestClue");
         nav = GetComponent<NavMeshAgent>();
 
         closest = FindClue();
