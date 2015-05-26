@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
         Debug.Log("Start Timer Script");
         calibrationScreen = GameObject.FindGameObjectWithTag("Calibration");
         player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<FirstPersonController>().enabled = false;
 
         counterText.text = "" + counter;
         StartCoroutine(countdown());
@@ -40,6 +41,7 @@ public class Timer : MonoBehaviour
 
         
         calibrationScreen.SetActive(false);
+        player.GetComponent<FirstPersonController>().enabled = true;
         player.GetComponent<EyeTrackerData>().isChosen = true;
     }
 }

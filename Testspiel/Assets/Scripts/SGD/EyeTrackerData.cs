@@ -38,7 +38,7 @@ public class EyeTrackerData : GazeMonobehaviour
         // isMouseModusActive = true;
        // Debug.Log("EyeTrackerData");
         OnClueStatus(false);
-        timer = GameObject.FindGameObjectWithTag("Timer");
+        //timer = GameObject.FindGameObjectWithTag("Timer");
 
         
 
@@ -51,7 +51,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
         if (isChosen == true)
         {
-
+            Debug.Log("start update Eyetracker data");
             calibrateET();
 
             clue = GetComponent<FindClosestClue>().FindClue();
@@ -64,11 +64,13 @@ public class EyeTrackerData : GazeMonobehaviour
             if (hasToWait == true)
             {
                 OnClueStatus(false);
+                Debug.Log("Start wait coroutine");
                 StartCoroutine(waitToDisplayClues());
 
             }
             else
             {
+                //Debug.Log("no coroutine");
                 getGazes();
                 checkGazeOnObject();
             }

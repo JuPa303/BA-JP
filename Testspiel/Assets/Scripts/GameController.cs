@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
         if (systemNumber == 1)
         {
             mapCamera = GameObject.FindGameObjectWithTag("MapCamera");
-            mapCamera.GetComponent<MapCamera>().showMap = true;
+            //mapCamera.GetComponent<MapCamera>().showMap = true;
         }
 
         //just compass scripts are enabled

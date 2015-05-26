@@ -22,8 +22,11 @@ public class TriggerScript : MonoBehaviour
     {
         eyetrackerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<EyeTrackerData>();
         compass = GameObject.FindGameObjectWithTag("Compass");
-        compassScript = compass.GetComponent<Compass>();
+        if (compass != null)
+        {
+            compassScript = compass.GetComponent<Compass>();
 
+        }
     }
 
     // Update is called once per frame
@@ -38,8 +41,8 @@ public class TriggerScript : MonoBehaviour
 
         if (collider.tag == "Player")
         {
-
            
+
 
             // ID = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID;
 
@@ -66,7 +69,10 @@ public class TriggerScript : MonoBehaviour
 
             }
 
-            compassScript.target = GameObject.Find("RoomTrigger" + GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID);
+            if (compass != null)
+            {
+                compassScript.target = GameObject.Find("RoomTrigger" + GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().triggerID);
+            }
             //Debug.Log("target" + compassScript.target);
         }
     }
