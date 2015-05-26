@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\SGD\FindClosestClue.cs" />
      <Compile Include="Assets\Scripts\SGD\HighlightController.cs" />
      <Compile Include="Assets\Scripts\SGD\SDGend.cs" />
+     <Compile Include="Assets\Scripts\SGD\Timer.cs" />
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\StartingScript.cs" />
      <Compile Include="Assets\Scripts\TriggerScript.cs" />

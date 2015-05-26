@@ -13,6 +13,8 @@ public class StartingScript : MonoBehaviour
     private GameObject clues;
     private GameObject gameControlObj;
     private GameObject compass;
+    private GameObject timer;
+    private GameObject calibrationScreen;
     private int system = 3;
     private FirstPersonController firstpersoncontroller;
 
@@ -38,11 +40,13 @@ public class StartingScript : MonoBehaviour
 
     private void getComponents()
     {
-        menue = GameObject.Find("Menu");
+        menue = GameObject.Find("StartScreen");
         gameControlObj = GameObject.Find("GameControl");
         player = GameObject.FindGameObjectWithTag("Player");
         eyeTracker = GameObject.FindGameObjectWithTag("GazeController");
         compass = GameObject.FindGameObjectWithTag("Compass");
+        timer = GameObject.FindGameObjectWithTag("Timer");
+        calibrationScreen = GameObject.FindGameObjectWithTag("Calibration");
 
         firstpersoncontroller = player.GetComponent<FirstPersonController>();
 
@@ -54,8 +58,10 @@ public class StartingScript : MonoBehaviour
         Camera.main.GetComponent<HighlightController>().enabled = false;
         firstpersoncontroller.enabled = false;
         //clues.SetActive(false);
-        //eyeTracker.SetActive(false);
-        compass.SetActive(false);
+        eyeTracker.SetActive(false);
+        //compass.SetActive(false);
+        timer.SetActive(false);
+        calibrationScreen.SetActive(false);
     }
 
 
@@ -88,7 +94,10 @@ public class StartingScript : MonoBehaviour
             {
                 menue.SetActive(false);
                 eyeTracker.SetActive(true);
-                player.GetComponent<EyeTrackerData>().isChosen = true;
+                //player.GetComponent<EyeTrackerData>().isChosen = true;
+                calibrationScreen.SetActive(true);
+                timer.SetActive(true);
+                
 
             }
             else if (system == 1)

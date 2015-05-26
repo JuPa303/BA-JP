@@ -18,7 +18,7 @@ public class HighlightController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("HighlightController");
+        
         player = GameObject.FindGameObjectWithTag("Player");
 
         eyeData = player.GetComponent<EyeTrackerData>();

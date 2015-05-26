@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MinimapEnd : MonoBehaviour {
+public class MinimapEnd : MonoBehaviour
+{
 
 
-    private int system =3;
+    private int system = 3;
     private GameObject end;
     private GameObject player;
 

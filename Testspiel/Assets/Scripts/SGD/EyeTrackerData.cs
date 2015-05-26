@@ -17,7 +17,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public bool hasToWait = false;
 
-    public bool isChosen;
+    public bool isChosen = false;
 
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
@@ -25,15 +25,20 @@ public class EyeTrackerData : GazeMonobehaviour
     int calibrationType = 5;
     private bool didCalibration = false;
 
+    public GameObject timer;
+
 
 
 
     // Use this for initialization
     void Start()
     {
+
+        Debug.Log("Start Eyetracker Data");
         // isMouseModusActive = true;
-        Debug.Log("EyeTrackerData");
+       // Debug.Log("EyeTrackerData");
         OnClueStatus(false);
+        timer = GameObject.FindGameObjectWithTag("Timer");
 
         
 
@@ -59,7 +64,7 @@ public class EyeTrackerData : GazeMonobehaviour
             if (hasToWait == true)
             {
                 OnClueStatus(false);
-                StartCoroutine(wait());
+                StartCoroutine(waitToDisplayClues());
 
             }
             else
@@ -72,7 +77,7 @@ public class EyeTrackerData : GazeMonobehaviour
         }
     }
 
-    public IEnumerator wait()
+    public IEnumerator waitToDisplayClues()
     {
 
         yield return new WaitForSeconds(3f); // waits 3 seconds
@@ -84,8 +89,10 @@ public class EyeTrackerData : GazeMonobehaviour
     {
         if (didCalibration == false)
         {
-            SMIGazeController.Instance.StartCalibration(calibrationType);
-            didCalibration = true;
+                   
+               SMIGazeController.Instance.StartCalibration(calibrationType);
+               didCalibration = true;
+           
         }
      
     }

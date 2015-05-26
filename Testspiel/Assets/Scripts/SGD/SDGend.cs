@@ -3,8 +3,12 @@ using System.Collections;
 
 public class SDGend : MonoBehaviour
 {
+    //This shows an End Screen if the player has reached his final Destination. 
+    //Now he can choose between doing the other two navigation systems or quitting the game.
 
-    private int system =3;
+
+
+    private int system = 3;
     private GameObject end;
     private GameObject player;
 
@@ -30,6 +34,8 @@ public class SDGend : MonoBehaviour
 
 
     }
+
+    //when user enters the last room
     private void OnTriggerEnter(Collider collider)
     {
         player.GetComponent<FirstPersonController>().enabled = false;
