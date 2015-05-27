@@ -20,6 +20,7 @@ public class TriggerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         eyetrackerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<EyeTrackerData>();
         compass = GameObject.FindGameObjectWithTag("Compass");
         if (compass != null)
@@ -64,8 +65,12 @@ public class TriggerScript : MonoBehaviour
             {
                 //Debug.Log("right direction");
                 increaseCounter();
-                eyetrackerScript.hasToWait = true;
 
+                if (eyetrackerScript != null)
+                {
+                    eyetrackerScript.hasToWait = true;
+
+                }
 
             }
 
