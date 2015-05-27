@@ -4,10 +4,10 @@ using System.Collections;
 public class FirstPersonController : MonoBehaviour
 {
 
-    private float movementSpeed = 1.0f;
+    private float movementSpeed = 5.0f;
     public float mouseSensitivity = 3.0f;
 
-    public float jumpSpeed = 5.0f;
+    public float jumpSpeed = 6.0f;
 
     public float upDownRange = 60.0f;
     float rotUpDown = 0;

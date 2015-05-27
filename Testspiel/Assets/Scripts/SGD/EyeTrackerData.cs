@@ -17,7 +17,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public bool hasToWait = false;
 
-    public bool isChosen = false;
+    //public bool isChosen = true;
 
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
@@ -36,11 +36,11 @@ public class EyeTrackerData : GazeMonobehaviour
 
         Debug.Log("Start Eyetracker Data");
         // isMouseModusActive = true;
-       // Debug.Log("EyeTrackerData");
+        // Debug.Log("EyeTrackerData");
         OnClueStatus(false);
         //timer = GameObject.FindGameObjectWithTag("Timer");
 
-        
+
 
     }
 
@@ -49,34 +49,33 @@ public class EyeTrackerData : GazeMonobehaviour
     void Update()
     {
 
-        if (isChosen == true)
+
+        Debug.Log("start update Eyetracker data");
+        calibrateET();
+
+        clue = GetComponent<FindClosestClue>().FindClue();
+        sample = SMIGazeController.Instance.GetSample();
+        gazePos = sample.averagedEye.gazePosInScreenCoords();
+
+        //getGazes();
+        //checkGazeOnObject();
+
+        if (hasToWait == true)
         {
-            Debug.Log("start update Eyetracker data");
-            calibrateET();
-
-            clue = GetComponent<FindClosestClue>().FindClue();
-            sample = SMIGazeController.Instance.GetSample();
-            gazePos = sample.averagedEye.gazePosInScreenCoords();
-
-            //getGazes();
-            //checkGazeOnObject();
-
-            if (hasToWait == true)
-            {
-                OnClueStatus(false);
-                Debug.Log("Start wait coroutine");
-                StartCoroutine(waitToDisplayClues());
-
-            }
-            else
-            {
-                //Debug.Log("no coroutine");
-                getGazes();
-                checkGazeOnObject();
-            }
-
+            OnClueStatus(false);
+            Debug.Log("Start wait coroutine");
+            StartCoroutine(waitToDisplayClues());
 
         }
+        else
+        {
+            //Debug.Log("no coroutine");
+            getGazes();
+            checkGazeOnObject();
+        }
+
+
+
     }
 
     public IEnumerator waitToDisplayClues()
@@ -91,12 +90,12 @@ public class EyeTrackerData : GazeMonobehaviour
     {
         if (didCalibration == false)
         {
-                   
-               SMIGazeController.Instance.StartCalibration(calibrationType);
-               didCalibration = true;
-           
+
+            SMIGazeController.Instance.StartCalibration(calibrationType);
+            didCalibration = true;
+
         }
-     
+
     }
 
     private void getGazes()

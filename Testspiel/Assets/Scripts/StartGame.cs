@@ -1,0 +1,31 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class StartGame : MonoBehaviour {
+
+    private GameObject systemMenue;
+    private GameObject mainMenue;
+
+
+	// Use this for initialization
+	void Start () {
+        systemMenue = GameObject.Find("StartScreen");
+        mainMenue = GameObject.FindGameObjectWithTag("MainMenue");
+        systemMenue.SetActive(false);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+     
+	}
+
+
+    public void chooseSystem()
+    {
+        
+        systemMenue.SetActive(true);
+        mainMenue.SetActive(false);
+    }
+}
+

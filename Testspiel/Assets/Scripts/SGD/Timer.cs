@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour
         
         calibrationScreen.SetActive(false);
         player.GetComponent<FirstPersonController>().enabled = true;
-        player.GetComponent<EyeTrackerData>().isChosen = true;
+        //player.GetComponent<EyeTrackerData>().isChosen = true;
     }
 }
 
