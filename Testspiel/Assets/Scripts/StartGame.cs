@@ -11,6 +11,7 @@ public class StartGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Start");
         systemMenue = GameObject.Find("StartScreen");
         mainMenue = GameObject.FindGameObjectWithTag("MainMenue");
         controlMenue = GameObject.FindGameObjectWithTag("ControlMenue");

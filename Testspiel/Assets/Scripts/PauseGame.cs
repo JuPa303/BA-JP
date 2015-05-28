@@ -24,6 +24,9 @@ public class PauseGame : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
 
+            //Eyetracker gibt null reference aus, abfangen
+            //bool wenn in status, dann nicht mehr tracken
+
             Debug.Log("Pressed ESC");
             pauseMenue.SetActive(true);
             player.GetComponent<FirstPersonController>().enabled = false;
@@ -36,7 +39,8 @@ public class PauseGame : MonoBehaviour
 
     public void backToMainMenue()
     {
-
+        Debug.Log("go back to menue");
+        player.GetComponent<EyeTrackerData>().isChosen = false;
         Application.LoadLevel("Start");
     }
 
