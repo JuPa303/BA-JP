@@ -4,7 +4,7 @@ using System.Collections;
 public class FirstPersonController : MonoBehaviour
 {
 
-    private float movementSpeed = 5.0f;
+    private float movementSpeed = 3.0f;
     public float mouseSensitivity = 3.0f;
 
     public float jumpSpeed = 6.0f;
@@ -60,7 +60,7 @@ public class FirstPersonController : MonoBehaviour
             movementSpeed = 8.0f;
         }
         else
-            movementSpeed = 5.0f;
+            movementSpeed = 4.0f;
 
         Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 

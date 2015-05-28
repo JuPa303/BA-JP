@@ -41,6 +41,7 @@ public class PauseGame : MonoBehaviour
     {
         Debug.Log("go back to menue");
         player.GetComponent<EyeTrackerData>().isChosen = false;
+
         Application.LoadLevel("Start");
     }
 

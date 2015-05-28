@@ -61,24 +61,26 @@ public class EyeTrackerData : GazeMonobehaviour
             //getGazes();
             //checkGazeOnObject();
 
-            if (hasToWait == true)
-            {
-                OnClueStatus(false);
-                Debug.Log("Start wait coroutine");
-                StartCoroutine(waitToDisplayClues());
+            //if (hasToWait == true)
+            //{
+            //    OnClueStatus(false);
+            //    Debug.Log("Start wait coroutine");
+            //    StartCoroutine(waitToDisplayClues());
 
-            }
-            else
-            {
-                //Debug.Log("no coroutine");
-                getGazes();
-                checkGazeOnObject();
-            }
+            //}
+            //else
+            //{
+            //    //Debug.Log("no coroutine");
+            getGazes();
+            checkGazeOnObject();
+            //}
 
         }
 
     }
 
+
+    //not wait because players are too fast
     public IEnumerator waitToDisplayClues()
     {
 
