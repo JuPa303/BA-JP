@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MapCamera.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MinimapEnd.cs" />
+     <Compile Include="Assets\Scripts\PauseGame.cs" />
      <Compile Include="Assets\Scripts\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\SGD\CameraSeesClue.cs" />
      <Compile Include="Assets\Scripts\SGD\EyeTrackerData.cs" />

@@ -84,7 +84,7 @@ public class ChooseSystem: MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            gameControlObj.GetComponent<GameController>().systemNumber = system;
+            //gameControlObj.GetComponent<GameController>().systemNumber = system;
 
 
             //firstpersoncontroller.enabled = true;

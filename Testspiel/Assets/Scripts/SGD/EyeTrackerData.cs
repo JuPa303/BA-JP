@@ -17,7 +17,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public bool hasToWait = false;
 
-    //public bool isChosen = true;
+    public bool isChosen = false;
 
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
@@ -34,7 +34,7 @@ public class EyeTrackerData : GazeMonobehaviour
     void Start()
     {
 
-        Debug.Log("Start Eyetracker Data");
+        
         // isMouseModusActive = true;
         // Debug.Log("EyeTrackerData");
         OnClueStatus(false);
@@ -48,33 +48,34 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-        Debug.Log("start update Eyetracker data");
-        calibrateET();
-
-        clue = GetComponent<FindClosestClue>().FindClue();
-        sample = SMIGazeController.Instance.GetSample();
-        gazePos = sample.averagedEye.gazePosInScreenCoords();
-
-        //getGazes();
-        //checkGazeOnObject();
-
-        if (hasToWait == true)
+        if (isChosen == true)
         {
-            OnClueStatus(false);
-            Debug.Log("Start wait coroutine");
-            StartCoroutine(waitToDisplayClues());
+
+           // Debug.Log("start update Eyetracker data");
+            calibrateET();
+
+            clue = GetComponent<FindClosestClue>().FindClue();
+            sample = SMIGazeController.Instance.GetSample();
+            gazePos = sample.averagedEye.gazePosInScreenCoords();
+
+            //getGazes();
+            //checkGazeOnObject();
+
+            if (hasToWait == true)
+            {
+                OnClueStatus(false);
+                Debug.Log("Start wait coroutine");
+                StartCoroutine(waitToDisplayClues());
+
+            }
+            else
+            {
+                //Debug.Log("no coroutine");
+                getGazes();
+                checkGazeOnObject();
+            }
 
         }
-        else
-        {
-            //Debug.Log("no coroutine");
-            getGazes();
-            checkGazeOnObject();
-        }
-
-
 
     }
 
