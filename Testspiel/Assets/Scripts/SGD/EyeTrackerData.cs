@@ -52,7 +52,9 @@ public class EyeTrackerData : GazeMonobehaviour
         {
 
            // Debug.Log("start update Eyetracker data");
-            calibrateET();
+
+
+            //calibrateET();
 
             clue = GetComponent<FindClosestClue>().FindClue();
             sample = SMIGazeController.Instance.GetSample();
@@ -209,19 +211,19 @@ public class EyeTrackerData : GazeMonobehaviour
 
 
 
-    //check if user's gaze is directly on clue
+    //check if user's gaze is directly on trigger or arrow
     private void checkGazeOnObject()
     {
 
         try
         {
             objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
-            if (objectInFocus.tag == "Clue")
+            if (objectInFocus.tag == "AOI" || objectInFocus.tag == "Arrow")
             {
                 clue = objectInFocus;
                 OnClueStatus(false);
                 //Debug.Log("gaze on clue");
-
+                
             }
         }
 
@@ -238,10 +240,10 @@ public class EyeTrackerData : GazeMonobehaviour
     //draw gaze as rectangle
     private void OnGUI()
     {
-        //Texture2D square = new Texture2D(10, 10);
-        //square.SetPixel(1, 1, Color.white);
-        //square.Apply();
-        //GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
+        Texture2D square = new Texture2D(10, 10);
+        square.SetPixel(1, 1, Color.white);
+        square.Apply();
+        GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
 
     }
 

@@ -13,6 +13,8 @@ public class HighlightController : MonoBehaviour
 
     public EyeTrackerData eyeData;
 
+    private GameObject arrow;
+   
 
 
     // Use this for initialization
@@ -25,6 +27,7 @@ public class HighlightController : MonoBehaviour
         eyeData.OnClueStatus += setClueStatus;
 
         getDataFromScripts();
+        arrow.SetActive(false);
 
     }
 
@@ -41,23 +44,23 @@ public class HighlightController : MonoBehaviour
 
         // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
         //Picture only displayed when camera facing towards clue
-        if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
-        {
+        //if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
+        //{
             //no wall between Player and clue 
-            if (!isBlockedByWall & showClue)
+            if (showClue)
             {
-                isClosestAndSeen = true;
+                arrow.SetActive(true);
             }
             else
             {
-                isClosestAndSeen = false;
+                arrow.SetActive(false);
             }
 
-        }
-        else
-        {
-            isClosestAndSeen = false;
-        }
+       // }
+        //else
+        //{
+        //    arrow.SetActive(false);
+        //}
 
     }
 
@@ -71,11 +74,25 @@ public class HighlightController : MonoBehaviour
     //draws Icon on Clue only when clue is visible for player
     void OnGUI()
     {
-        GUI.color = new Color32(255, 255, 255, 12);
+
+       
+
+
+
+       // GUI.color = new Color32(255, 255, 255, 20);
         if (isClosestAndSeen)
         {
-            //Debug.Log("Drawing");
-            GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
+           
+            arrow.SetActive(false);
+
+
+        //    //Debug.Log("Drawing");
+        //    GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
+        }
+        else
+        {
+            arrow.SetActive(true);
+           
         }
 
     }
@@ -83,7 +100,10 @@ public class HighlightController : MonoBehaviour
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
-        isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
+        //isBlockedByWall = clue.GetComponent<CameraSeesClue>().isBlocked(clue);
+        //isBlockedByWall = clue.transform.GetChild(0).gameObject.GetComponent<CameraSeesClue>().isBlocked(clue);
+        arrow = clue.transform.GetChild(0).gameObject;
+        arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 80);
 
     }
 }

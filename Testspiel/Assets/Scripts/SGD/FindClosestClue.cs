@@ -17,7 +17,7 @@ public class FindClosestClue : MonoBehaviour
     public GameObject FindClue()
     {
         GameObject[] clues;
-        clues = GameObject.FindGameObjectsWithTag("Clue");
+        clues = GameObject.FindGameObjectsWithTag("AOI");
 
         float distance = Mathf.Infinity;
 
