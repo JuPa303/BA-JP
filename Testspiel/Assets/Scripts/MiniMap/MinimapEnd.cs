@@ -8,12 +8,16 @@ public class MinimapEnd : MonoBehaviour
     private int system = 3;
     private GameObject end;
     private GameObject player;
-
+    private GameObject skeleton;
+    private Animation danceAnim;
     // Use this for initialization
     void Start()
     {
         end = GameObject.FindGameObjectWithTag("End");
         player = GameObject.FindGameObjectWithTag("Player");
+        skeleton = GameObject.FindGameObjectWithTag("Skeleton");
+        danceAnim = skeleton.GetComponent<Animation>();
+        
         end.SetActive(false);
     }
 
@@ -37,6 +41,7 @@ public class MinimapEnd : MonoBehaviour
         end.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        danceAnim.Play();
 
 
     }
