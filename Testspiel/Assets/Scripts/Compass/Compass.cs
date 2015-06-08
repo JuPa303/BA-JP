@@ -15,7 +15,7 @@ public class Compass : MonoBehaviour
 
 
     //tex width = 128
-    private float thresholdOutside = 10.0f;
+    private float thresholdOutside = 30.0f;
     private float thresholdInside = 50.0f;
 
     private Vector3 arrowPos;
@@ -34,8 +34,12 @@ public class Compass : MonoBehaviour
 
 
         target = GameObject.Find("RoomTrigger0");
-        texHeight = arrowUp.height;
-        rect = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, texHeight * 0.3f, texHeight * 0.3f);
+        //texHeight = arrowUp.height;
+        //arrowUp.height = 128
+
+        texHeight = 30.0f;
+        rect = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, texHeight, texHeight);
+        Debug.Log("ScreenWidth" + Screen.width);
 
 
     }
@@ -44,7 +48,9 @@ public class Compass : MonoBehaviour
     {
         //if (isChosen == true)
         //{
-           getArrowPos();
+        getArrowPos();
+        Debug.Log("arrowPos.x " + arrowPos.x);
+        Debug.Log("arrowPos.y " + arrowPos.y);
         //}
     }
 
@@ -70,7 +76,7 @@ public class Compass : MonoBehaviour
             //down outside
             if (arrowPos.y + arrowUp.height > Screen.height - thresholdOutside)
             {
-                arrowPos.y = Screen.height - thresholdOutside;
+                arrowPos.y = Screen.height - thresholdOutside- texHeight;
             }
 
 
@@ -84,7 +90,7 @@ public class Compass : MonoBehaviour
             //right outside
             if (arrowPos.x + texHeight > Screen.width)
             {
-                arrowPos.x = Screen.width - thresholdOutside - texHeight / 2;
+                arrowPos.x = Screen.width - thresholdOutside - texHeight;/// 2;
             }
 
 
@@ -159,7 +165,7 @@ public class Compass : MonoBehaviour
                 else
                 {
                     arrowPos.x = arrowPos.x + 10;
-                    arrowPos.y = Screen.height - texHeight / 2;
+                    arrowPos.y = Screen.height - texHeight;
                     drawArrow(arrowDown);
 
                 }
@@ -178,7 +184,7 @@ public class Compass : MonoBehaviour
             else if (arrowPos.x + texHeight > Screen.width)
             {
                 arrowPos.x = Screen.width - thresholdOutside - texHeight;
-                //Debug.Log("draw right arrow");
+                Debug.Log("draw right arrow");
                 drawArrow(arrowRight);
             }
         }
