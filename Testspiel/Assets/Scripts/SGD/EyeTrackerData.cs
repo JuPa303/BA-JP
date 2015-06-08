@@ -6,7 +6,6 @@ public class EyeTrackerData : GazeMonobehaviour
 {
     public bool isMouseModusActive = false;
 
-
     //public bool showClue = false;
     Vector3 averageGazePosition, vectorToClue2D, vectorToGaze;
     Vector2 gazePos, gazePoint1, gazePoint2;
@@ -34,12 +33,7 @@ public class EyeTrackerData : GazeMonobehaviour
     void Start()
     {
 
-        
-        // isMouseModusActive = true;
-        // Debug.Log("EyeTrackerData");
         OnClueStatus(false);
-        //timer = GameObject.FindGameObjectWithTag("Timer");
-
 
 
     }
@@ -51,10 +45,7 @@ public class EyeTrackerData : GazeMonobehaviour
         if (isChosen == true)
         {
 
-           // Debug.Log("start update Eyetracker data");
-
-
-            //calibrateET();
+            calibrateET();
 
             clue = GetComponent<FindClosestClue>().FindClue();
             sample = SMIGazeController.Instance.GetSample();
@@ -114,8 +105,6 @@ public class EyeTrackerData : GazeMonobehaviour
 
                 gazePoint1 = sample.averagedEye.gazePosInScreenCoords();
                 hasFirstPoint = true;
-                // Debug.Log("gazePoint2" + gazePoint2);
-
 
             }
             else
@@ -162,13 +151,6 @@ public class EyeTrackerData : GazeMonobehaviour
 
 
         float distanceOfGazeVectors = Vector2.Distance(gazePoint1, gazePoint2);
-
-        //float distanceGP1ToClue = Vector2.Distance(gazePoint1, cluePos2D);
-        //float distanceGP2ToClue = Vector2.Distance(gazePoint2, cluePos2D);
-
-        //Debug.Log("GP1" + gazePoint1);
-        //Debug.Log("GP2" + gazePoint2);
-
 
 
         //gazes are too close to get any difference for calculating the direction, seems to be fixation, keep first point
@@ -223,7 +205,7 @@ public class EyeTrackerData : GazeMonobehaviour
                 clue = objectInFocus;
                 OnClueStatus(false);
                 //Debug.Log("gaze on clue");
-                
+
             }
         }
 
@@ -240,10 +222,10 @@ public class EyeTrackerData : GazeMonobehaviour
     //draw gaze as rectangle
     private void OnGUI()
     {
-        Texture2D square = new Texture2D(10, 10);
-        square.SetPixel(1, 1, Color.white);
-        square.Apply();
-        GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
+        //Texture2D square = new Texture2D(10, 10);
+        //square.SetPixel(1, 1, Color.white);
+        //square.Apply();
+        //GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
 
     }
 

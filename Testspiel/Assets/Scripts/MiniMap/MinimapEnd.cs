@@ -3,13 +3,13 @@ using System.Collections;
 
 public class MinimapEnd : MonoBehaviour
 {
-
-
     private int system = 3;
     private GameObject end;
     private GameObject player;
     private GameObject skeleton;
     private Animation danceAnim;
+
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +35,8 @@ public class MinimapEnd : MonoBehaviour
 
 
     }
+
+    //If player walks into collider, the endScreen will be shown, cursor will be unlocked and shown, dancing skeleton will appear.
     private void OnTriggerEnter(Collider collider)
     {
         player.GetComponent<FirstPersonController>().enabled = false;
@@ -46,6 +48,7 @@ public class MinimapEnd : MonoBehaviour
 
     }
 
+    //player can choose between compass, sgd and quitting
     public void pressOkay()
     {
         if (system != 3)

@@ -13,7 +13,6 @@ public class Compass : MonoBehaviour
 
     private Rect rect;
 
-
     //tex width = 128
     private float thresholdOutside = 30.0f;
     private float thresholdInside = 50.0f;
@@ -76,7 +75,7 @@ public class Compass : MonoBehaviour
             //down outside
             if (arrowPos.y + arrowUp.height > Screen.height - thresholdOutside)
             {
-                arrowPos.y = Screen.height - thresholdOutside- texHeight;
+                arrowPos.y = Screen.height - thresholdOutside - texHeight;
             }
 
 

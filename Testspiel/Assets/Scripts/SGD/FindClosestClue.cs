@@ -14,6 +14,8 @@ public class FindClosestClue : MonoBehaviour
         closest = FindClue();
     }
 
+
+    //returns the closest clue by calculating the distances
     public GameObject FindClue()
     {
         GameObject[] clues;
@@ -38,11 +40,12 @@ public class FindClosestClue : MonoBehaviour
 
     void Update()
     {
-        //FindClue();
+
         closest = FindClue();
-        //print(FindClue().name);
+
     }
 
+    //returns the path length to decide, which target is the closest
     public float CalculatePathMesh(Vector3 targetPosition)
     {
         NavMeshPath path = new NavMeshPath();

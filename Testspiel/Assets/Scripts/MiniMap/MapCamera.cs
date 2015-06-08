@@ -14,40 +14,30 @@ public class MapCamera : MonoBehaviour
     void Start()
     {
         mapCamera = gameObject.GetComponent<Camera>();
-       // showMap = false;
         player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
-    // Update is called once per frame
+    // Map stays the same size even on different screens, it's square
     void Update()
     {
 
-        //if (showMap == true)
-        //{
+        mapCamera.enabled = true;
+        mapCamera.pixelRect = new Rect(Screen.width - 300, 50, 270, 270);
 
-            mapCamera.enabled = true;
-            mapCamera.pixelRect = new Rect(Screen.width - 300, 50, 270,270);
 
-        //}
-
-        //else
-        //{
-        //    mapCamera.enabled = false;
-
-        //}
     }
 
     void OnGUI()
     {
         Vector3 targetPos = mapCamera.WorldToScreenPoint(player.transform.position);
-        //GUI.DrawTexture(new Rect(targetPos.x, targetPos.y, 20, 0), playerTex);
+        
 
     }
 
-    private void findTargets()
-    {
+    //private void findTargets()
+    //{
 
-        Vector3 targetPos = mapCamera.WorldToScreenPoint(player.transform.position);
-    }
+    //    Vector3 targetPos = mapCamera.WorldToScreenPoint(player.transform.position);
+    //}
 }
