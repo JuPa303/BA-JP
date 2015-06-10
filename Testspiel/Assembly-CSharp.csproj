@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\PauseGame.cs" />
      <Compile Include="Assets\Scripts\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\SGD\CameraSeesClue.cs" />
+     <Compile Include="Assets\Scripts\SGD\ChangeColor.cs" />
      <Compile Include="Assets\Scripts\SGD\EyeTrackerData.cs" />
      <Compile Include="Assets\Scripts\SGD\FindClosestClue.cs" />
      <Compile Include="Assets\Scripts\SGD\HighlightController.cs" />

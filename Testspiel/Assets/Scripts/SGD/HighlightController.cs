@@ -23,10 +23,13 @@ public class HighlightController : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
 
+        
+
         eyeData = player.GetComponent<EyeTrackerData>();
+        getDataFromScripts();
         eyeData.OnClueStatus += setClueStatus;
 
-        getDataFromScripts();
+        
         arrow.SetActive(false);
 
     }
@@ -65,31 +68,33 @@ public class HighlightController : MonoBehaviour
     }
 
 
-    //draws Icon on Clue only when clue is visible for player
-    void OnGUI()
-    {
+    ////draws Icon on Clue only when clue is visible for player
+    //void OnGUI()
+    //{
 
-        // GUI.color = new Color32(255, 255, 255, 20);
-        if (isClosestAndSeen)
-        {
+    //    // GUI.color = new Color32(255, 255, 255, 20);
+    //    if (isClosestAndSeen)
+    //    {
+    //        arrow.SetActive(true);
 
-            arrow.SetActive(false);
+    //        //arrow.SetActive(false);
 
-            //    GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
-        }
-        else
-        {
-            arrow.SetActive(true);
+    //        //    GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
+    //    }
+    //    else
+    //    {
+    //        //arrow.SetActive(true);
+    //        arrow.SetActive(false);
 
-        }
+    //    }
 
-    }
+    //}
 
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         arrow = clue.transform.GetChild(0).gameObject;
-        arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 80);
+        //arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 80);
 
     }
 }

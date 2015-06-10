@@ -15,6 +15,9 @@ public class FirstPersonController : MonoBehaviour
 
     CharacterController characterController;
 
+     NavMeshAgent navAgent;
+    
+
     // Use this for initialization
     void Start()
     {
@@ -22,6 +25,7 @@ public class FirstPersonController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
 
         characterController = GetComponent<CharacterController>();
+        navAgent = GetComponent<NavMeshAgent>();
 
     }
 
@@ -49,8 +53,15 @@ public class FirstPersonController : MonoBehaviour
         //Jump
         if (characterController.isGrounded && Input.GetButtonDown("Jump"))
         {
-
+            navAgent.enabled = false;
+           // GetComponent<Rigidbody>().isKinematic = false;
+           // GetComponent<Rigidbody>().useGravity = true;
+           // GetComponent<Rigidbody>().AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+           // GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 0), ForceMode.Impulse);
             verticalVelocity = jumpSpeed;
+            //navAgent.Resume();
+
+             StartCoroutine(wait());
         }
 
         //Sprint
@@ -60,12 +71,24 @@ public class FirstPersonController : MonoBehaviour
             movementSpeed = 8.0f;
         }
         else
+        {
             movementSpeed = 4.0f;
+        }
 
         Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 
         speed = transform.rotation * speed;
         characterController.Move(speed * Time.deltaTime);
+      
+
+    }
+
+    IEnumerator wait()
+    {
+         
+        yield return new WaitForSeconds(1);
+        navAgent.enabled = true;
+        
 
     }
 }
