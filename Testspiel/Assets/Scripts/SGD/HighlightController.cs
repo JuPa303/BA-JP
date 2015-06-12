@@ -14,23 +14,27 @@ public class HighlightController : MonoBehaviour
     public EyeTrackerData eyeData;
 
     private GameObject arrow;
+    private float fadeTime = 0.3f;
+
+    private Color solidColor, fadedColor;
 
 
 
     // Use this for initialization
     void Start()
     {
-
+        solidColor = new Color32(255, 0, 0, 50);
+        fadedColor = new Color32(255, 0, 0, 0);
         player = GameObject.FindGameObjectWithTag("Player");
 
-        
+
 
         eyeData = player.GetComponent<EyeTrackerData>();
         getDataFromScripts();
         eyeData.OnClueStatus += setClueStatus;
 
-        
-        arrow.SetActive(false);
+
+        //arrow.SetActive(false);
 
     }
 
@@ -53,6 +57,7 @@ public class HighlightController : MonoBehaviour
         if (showClue)
         {
             arrow.SetActive(true);
+            //StartCoroutine(fadeIn());
         }
         else
         {
@@ -96,5 +101,20 @@ public class HighlightController : MonoBehaviour
         arrow = clue.transform.GetChild(0).gameObject;
         //arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 80);
 
+    }
+
+
+
+    IEnumerator fadeIn()
+    {
+        Debug.Log("Fade in");
+        for (float i = 0; i < fadeTime; i += Time.deltaTime)
+        {
+            Debug.Log("Fade in time");
+            arrow.GetComponent<Renderer>().material.color = Color.Lerp(fadedColor, solidColor, i / fadeTime);
+
+        }
+        Debug.Log("Fade in done");
+        yield return null;
     }
 }

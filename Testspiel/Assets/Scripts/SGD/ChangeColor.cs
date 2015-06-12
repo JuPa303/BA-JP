@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ChangeColor : MonoBehaviour
 {
+   
 
     // Use this for initialization
     void Start()
@@ -25,9 +26,11 @@ public class ChangeColor : MonoBehaviour
         foreach (GameObject go in clues)
         {
 
-            go.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 60);
-
+            go.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 50);
+          
         }
 
     }
+
+ 
 }

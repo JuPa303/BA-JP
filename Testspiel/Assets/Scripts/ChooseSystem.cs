@@ -97,7 +97,7 @@ public class ChooseSystem: MonoBehaviour
                 ////player.GetComponent<EyeTrackerData>().isChosen = true;
                 //calibrationScreen.SetActive(true);
                 //timer.SetActive(true);
-                Application.LoadLevel("SGD");
+                Application.LoadLevel("SGD2");
                 
 
             }

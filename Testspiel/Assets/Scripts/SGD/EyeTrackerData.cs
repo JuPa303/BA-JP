@@ -51,8 +51,9 @@ public class EyeTrackerData : GazeMonobehaviour
             sample = SMIGazeController.Instance.GetSample();
             gazePos = sample.averagedEye.gazePosInScreenCoords();
 
-            getGazes();
             checkGazeOnObject();
+            getGazes();
+
             //}
 
         }
@@ -195,10 +196,10 @@ public class EyeTrackerData : GazeMonobehaviour
 
             }
 
-            else
-            {
-                //Debug.Log("gaze  not on clue");
-            }
+            //else
+            //{
+            //    Debug.Log("gaze  not on clue");
+            //}
         }
 
         catch (System.Exception e)
