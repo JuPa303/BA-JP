@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\ChooseSystem.cs" />
      <Compile Include="Assets\Scripts\Compass\Compass.cs" />
      <Compile Include="Assets\Scripts\Compass\CompassEnd.cs" />
+     <Compile Include="Assets\Scripts\Filewriter.cs" />
      <Compile Include="Assets\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MapCamera.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\SGD\Timer.cs" />
      <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
+     <Compile Include="Assets\Scripts\TimeKeeper.cs" />
      <Compile Include="Assets\Scripts\TriggerScript.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

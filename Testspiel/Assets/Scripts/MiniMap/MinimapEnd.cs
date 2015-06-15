@@ -7,6 +7,7 @@ public class MinimapEnd : MonoBehaviour
     private GameObject end;
     private GameObject player;
     private GameObject skeleton;
+    private GameObject data;
     private Animation danceAnim;
 
 
@@ -17,6 +18,9 @@ public class MinimapEnd : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         skeleton = GameObject.FindGameObjectWithTag("Skeleton");
         danceAnim = skeleton.GetComponent<Animation>();
+
+        data = GameObject.FindGameObjectWithTag("Data");
+      
         
         end.SetActive(false);
     }
@@ -44,6 +48,10 @@ public class MinimapEnd : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         danceAnim.Play();
+
+        data.GetComponent<TimeKeeper>().TimerIsRunning = false;
+
+
 
 
     }
