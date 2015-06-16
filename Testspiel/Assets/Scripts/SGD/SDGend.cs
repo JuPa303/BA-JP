@@ -11,6 +11,7 @@ public class SDGend : MonoBehaviour
     private int system = 3;
     private GameObject end;
     private GameObject player;
+    private GameObject data;
 
     // Use this for initialization
     void Start()
@@ -18,6 +19,7 @@ public class SDGend : MonoBehaviour
         end = GameObject.FindGameObjectWithTag("EndSDG");
         player = GameObject.FindGameObjectWithTag("Player");
         end.SetActive(false);
+        data = GameObject.FindGameObjectWithTag("Data");
     }
 
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class SDGend : MonoBehaviour
         end.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
 
     }

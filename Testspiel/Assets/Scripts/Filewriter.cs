@@ -11,7 +11,8 @@ public class Filewriter : MonoBehaviour
     public string time = "";
     public bool countingEnds = false;
 
-    private int counter = 0;
+    private int sceneCounter = 0;
+    public int gazeCounter = 0;
 
     private StreamWriter sr;
 
@@ -30,10 +31,10 @@ public class Filewriter : MonoBehaviour
 
     private void setFileName()
     {
-        fileName = sceneName + counter + ".txt";
+        fileName = sceneName + sceneCounter + ".txt";
         if (File.Exists(fileName))
         {
-            counter++;
+            sceneCounter++;
             setFileName();
         }
         else
@@ -47,8 +48,10 @@ public class Filewriter : MonoBehaviour
     {
         if (countingEnds == true)
         {
-
+            sr.WriteLine("Level: " + sceneName);
             sr.WriteLine("Time needed in this Level: " + time + "seconds");
+            sr.WriteLine("Gaze on navigation clues " + time + "times");
+
             sr.Close();
             countingEnds = false;
         }

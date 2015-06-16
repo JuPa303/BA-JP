@@ -25,6 +25,10 @@ public class EyeTrackerData : GazeMonobehaviour
     private bool didCalibration = false;
 
     public GameObject timer;
+    private GameObject data;
+
+    public int gazeCounter = 0;
+    public bool quitCounting = false;
 
 
 
@@ -34,6 +38,7 @@ public class EyeTrackerData : GazeMonobehaviour
     {
 
         OnClueStatus(false);
+       data = GameObject.FindGameObjectWithTag("Data");
 
 
     }
@@ -192,6 +197,16 @@ public class EyeTrackerData : GazeMonobehaviour
             {
                 clue = objectInFocus;
                 OnClueStatus(false);
+
+                if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
+                {
+                    gazeCounter++;
+                }
+                if (quitCounting == true)
+                {
+                    data.GetComponent<Filewriter>().gazeCounter = gazeCounter;
+                }
+               
                 //Debug.Log("gaze on clue");
 
             }
