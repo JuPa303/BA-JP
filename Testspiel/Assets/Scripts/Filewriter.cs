@@ -27,7 +27,7 @@ public class Filewriter : MonoBehaviour
     void Update()
     {
         writeData();
-        Debug.Log("gazeTimeCounter" + gazeTimeCounter);
+       
     }
 
     private void setFileName()
@@ -50,8 +50,8 @@ public class Filewriter : MonoBehaviour
         if (countingEnds == true)
         {
             sr.WriteLine("Level: " + sceneName);
-            sr.WriteLine("Time needed in this Level: " + time + "seconds");
-            sr.WriteLine("Gaze on navigation clues: " + gazeTimeCounter + "seconds");
+            sr.WriteLine("Time needed in this Level: " + time + " seconds");
+            sr.WriteLine("Gaze on navigation clues: " + gazeTimeCounter + " seconds");
 
             sr.Close();
             countingEnds = false;

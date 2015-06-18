@@ -193,13 +193,13 @@ public class EyeTrackerData : GazeMonobehaviour
             objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
             if (objectInFocus.tag == "AOI" || objectInFocus.tag == "Arrow")
             {
-                clue = objectInFocus;
+                //clue = objectInFocus;
                 OnClueStatus(false);
 
                 if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
                 {
                     gazeTimeCounter += Time.deltaTime * 1;
-                    Debug.Log("counter" + gazeTimeCounter);
+                   
                 }
                 if (quitCounting == true)
                 {
