@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using iView;
 
 public class Compass : MonoBehaviour
 {
@@ -26,6 +30,8 @@ public class Compass : MonoBehaviour
     public bool isChosen;
 
 
+    public float CompassGazeTimer = 0.0f;
+
 
 
     void Start()
@@ -38,7 +44,7 @@ public class Compass : MonoBehaviour
 
         texHeight = 30.0f;
         rect = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, texHeight, texHeight);
-        Debug.Log("ScreenWidth" + Screen.width);
+        //Debug.Log("ScreenWidth" + Screen.width);
 
 
     }
@@ -48,9 +54,14 @@ public class Compass : MonoBehaviour
         //if (isChosen == true)
         //{
         getArrowPos();
-        Debug.Log("arrowPos.x " + arrowPos.x);
-        Debug.Log("arrowPos.y " + arrowPos.y);
+        //Debug.Log("arrowPos.x " + arrowPos.x);
+        //Debug.Log("arrowPos.y " + arrowPos.y);
         //}
+    }
+
+    void Update()
+    {
+        checkGazeOnArrow();
     }
 
 
@@ -183,7 +194,7 @@ public class Compass : MonoBehaviour
             else if (arrowPos.x + texHeight > Screen.width)
             {
                 arrowPos.x = Screen.width - thresholdOutside - texHeight;
-                Debug.Log("draw right arrow");
+                //Debug.Log("draw right arrow");
                 drawArrow(arrowRight);
             }
         }
@@ -195,7 +206,29 @@ public class Compass : MonoBehaviour
 
         rect.x = arrowPos.x;
         rect.y = arrowPos.y;
+
         GUI.DrawTexture(rect, arrow);
+
+    }
+
+
+
+    private void checkGazeOnArrow()
+    {
+        //Create A PointerEvent for a Screenspace Canvas
+            PointerEventData pointer = new PointerEventData(EventSystem.current);
+            pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInScreenCoords();
+
+            //Safe the Raycast
+            var raycastResults = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer, raycastResults);
+
+            if (rect.Contains(pointer.position))
+            {
+                CompassGazeTimer+= Time.deltaTime * 1;
+                Debug.Log("looked at compass" + CompassGazeTimer);
+            }
+            //Debug.Log("pointerPos" + pointer.position);  
 
     }
 }

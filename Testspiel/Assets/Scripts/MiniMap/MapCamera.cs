@@ -35,9 +35,4 @@ public class MapCamera : MonoBehaviour
 
     }
 
-    //private void findTargets()
-    //{
-
-    //    Vector3 targetPos = mapCamera.WorldToScreenPoint(player.transform.position);
-    //}
 }

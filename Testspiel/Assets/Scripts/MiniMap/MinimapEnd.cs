@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MinimapEnd : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MinimapEnd : MonoBehaviour
     private GameObject skeleton;
     private GameObject data;
     private Animation danceAnim;
+    private GameObject mapArea;
+
 
 
     // Use this for initialization
@@ -20,8 +23,8 @@ public class MinimapEnd : MonoBehaviour
         danceAnim = skeleton.GetComponent<Animation>();
 
         data = GameObject.FindGameObjectWithTag("Data");
-      
-        
+        mapArea = GameObject.FindGameObjectWithTag("MapArea");
+
         end.SetActive(false);
     }
 
@@ -48,7 +51,7 @@ public class MinimapEnd : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         danceAnim.Play();
-
+        data.GetComponent<Filewriter>().gazeTimeCounter = mapArea.transform.GetChild(0).gameObject.GetComponent<GazeArea>().mapGazeTimer;
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
 

@@ -8,6 +8,7 @@ public class CompassEnd : MonoBehaviour {
     private GameObject end;
     private GameObject player;
     private GameObject data;
+    private GameObject compass;
 
     // Use this for initialization
     void Start()
@@ -16,6 +17,7 @@ public class CompassEnd : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         end.SetActive(false);
         data = GameObject.FindGameObjectWithTag("Data");
+        compass = GameObject.FindGameObjectWithTag("Compass");
     }
 
     // Update is called once per frame
@@ -40,6 +42,8 @@ public class CompassEnd : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
 
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
+
+        data.GetComponent<Filewriter>().gazeTimeCounter = compass.GetComponent<Compass>().CompassGazeTimer;
 
 
 

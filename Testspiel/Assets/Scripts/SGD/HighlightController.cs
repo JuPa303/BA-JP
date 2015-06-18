@@ -9,8 +9,7 @@ public class HighlightController : MonoBehaviour
 
     private bool isClosestAndSeen, isBlockedByWall, showClue;
 
-    private int texUnit = 50; //height & width of texture
-
+   
     public EyeTrackerData eyeData;
 
     private GameObject arrow;

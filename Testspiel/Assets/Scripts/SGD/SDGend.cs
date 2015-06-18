@@ -46,6 +46,7 @@ public class SDGend : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
+        data.GetComponent<Filewriter>().gazeTimeCounter = player.GetComponent<EyeTrackerData>().gazeTimeCounter;
 
 
     }

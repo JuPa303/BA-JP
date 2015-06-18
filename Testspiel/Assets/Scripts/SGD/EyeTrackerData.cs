@@ -27,7 +27,7 @@ public class EyeTrackerData : GazeMonobehaviour
     public GameObject timer;
     private GameObject data;
 
-    public int gazeCounter = 0;
+    public float gazeTimeCounter = 0.0f;
     public bool quitCounting = false;
 
 
@@ -38,7 +38,7 @@ public class EyeTrackerData : GazeMonobehaviour
     {
 
         OnClueStatus(false);
-       data = GameObject.FindGameObjectWithTag("Data");
+        data = GameObject.FindGameObjectWithTag("Data");
 
 
     }
@@ -58,8 +58,6 @@ public class EyeTrackerData : GazeMonobehaviour
 
             checkGazeOnObject();
             getGazes();
-
-            //}
 
         }
 
@@ -200,13 +198,14 @@ public class EyeTrackerData : GazeMonobehaviour
 
                 if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
                 {
-                    gazeCounter++;
+                    gazeTimeCounter += Time.deltaTime * 1;
+                    Debug.Log("counter" + gazeTimeCounter);
                 }
                 if (quitCounting == true)
                 {
-                    data.GetComponent<Filewriter>().gazeCounter = gazeCounter;
+                    data.GetComponent<Filewriter>().gazeTimeCounter = gazeTimeCounter;
                 }
-               
+
                 //Debug.Log("gaze on clue");
 
             }
@@ -238,34 +237,5 @@ public class EyeTrackerData : GazeMonobehaviour
     }
 
 
-
-    //Nur ein Versuch, funktioniert so nicht ganz
-    //private void screenData()
-    //{
-    //    Vector2 clueVec = Camera.main.WorldToScreenPoint(clue.transform.position);
-    //    Vector2 gazeInScreenCoord = Camera.main.WorldToScreenPoint(gazePoint2);
-
-    //    //double screenWidthInCm = (Screen.width * 2.54 / 96.0);
-    //    //double screenHeightInCm = (Screen.height * 2.54 / 96.0);
-
-    //    //calculating 2,5 cm in px
-    //    double radiusCirclePx = (2.5 * Screen.dpi / 2.54);
-    //    float distanceOfGaze = Vector2.Distance(gazeInScreenCoord, clueVec);
-    //    Debug.Log("Distance" + distanceOfGaze);
-    //    Debug.Log("gaze screen" + gazeInScreenCoord);
-    //    Debug.Log("clueVec" + clueVec);
-    //    //Debug.Log("radius" + radiusCirclePx);
-
-    //    if (radiusCirclePx <= distanceOfGaze)
-    //    {
-    //        OnClueStatus(false);
-    //        //Debug.Log("don't show");
-    //    }
-    //    else
-    //    {
-    //        OnClueStatus(true);
-    //        //Debug.Log("show");
-    //    }
-    //}
 }
 

@@ -60,9 +60,12 @@
      <Compile Include="Assets\Scripts\ChooseSystem.cs" />
      <Compile Include="Assets\Scripts\Compass\Compass.cs" />
      <Compile Include="Assets\Scripts\Compass\CompassEnd.cs" />
+     <Compile Include="Assets\Scripts\Compass\GazeOnCompass.cs" />
      <Compile Include="Assets\Scripts\Filewriter.cs" />
      <Compile Include="Assets\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\MiniMap\EyetrackerGazeCounter.cs" />
+     <Compile Include="Assets\Scripts\MiniMap\GazeArea.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MapCamera.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MinimapEnd.cs" />
      <Compile Include="Assets\Scripts\PauseGame.cs" />
