@@ -21,7 +21,7 @@ public class GazeArea : MonoBehaviour
     public void OnGazeEnter()
     {
         mapGazeTimer += Time.deltaTime * 1;
-        Debug.Log("counter " + mapGazeTimer);
+        //Debug.Log("counter " + mapGazeTimer);
 
      
     }

@@ -7,9 +7,12 @@ public class HighlightController : MonoBehaviour
     private Vector3 cluePos, viewportPos;
     private GameObject clue, player;
 
-    private bool isClosestAndSeen, isBlockedByWall, showClue;
+    private bool isClosestAndSeen;
+    private bool isBlockedByWall;
+    private bool showClue;
 
-   
+    public bool arrowIsKilled;
+
     public EyeTrackerData eyeData;
 
     private GameObject arrow;
@@ -22,8 +25,7 @@ public class HighlightController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        solidColor = new Color32(255, 0, 0, 50);
-        fadedColor = new Color32(255, 0, 0, 0);
+       
         player = GameObject.FindGameObjectWithTag("Player");
 
 
@@ -31,6 +33,7 @@ public class HighlightController : MonoBehaviour
         eyeData = player.GetComponent<EyeTrackerData>();
         getDataFromScripts();
         eyeData.OnClueStatus += setClueStatus;
+        
 
 
         //arrow.SetActive(false);
@@ -42,27 +45,48 @@ public class HighlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        getDataFromScripts();
-
-        cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
-        viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
-
-        // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
-        //Picture only displayed when camera facing towards clue
-        //if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
-        //{
-        //no wall between Player and clue 
-        if (showClue)
+       // Debug.Log("killed " + arrowIsKilled);
+        if (arrowIsKilled == false)
         {
-            arrow.SetActive(true);
-            //StartCoroutine(fadeIn());
+            getDataFromScripts();
+
+            cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
+            viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
+
+            // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
+            //Picture only displayed when camera facing towards clue
+            //if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
+            //{
+            //no wall between Player and clue 
+
+
+           
+            if (showClue)
+            {
+                if (arrowIsKilled == true)
+                {
+                    arrow.SetActive(false);
+                }
+                else
+                {
+                    makeArrowVisible();
+                    //arrow.SetActive(true);
+                }
+                //StartCoroutine(fadeIn());
+            }
+            else
+            {
+                //arrow.SetActive(false);
+                makeArrowInvisible();
+            }
+
+
         }
         else
         {
+
             arrow.SetActive(false);
         }
-
     }
 
     private void setClueStatus(bool isShown)
@@ -72,27 +96,6 @@ public class HighlightController : MonoBehaviour
     }
 
 
-    ////draws Icon on Clue only when clue is visible for player
-    //void OnGUI()
-    //{
-
-    //    // GUI.color = new Color32(255, 255, 255, 20);
-    //    if (isClosestAndSeen)
-    //    {
-    //        arrow.SetActive(true);
-
-    //        //arrow.SetActive(false);
-
-    //        //    GUI.DrawTexture(new Rect((cluePos.x - texUnit / 2), (Screen.height - cluePos.y - texUnit / 2), texUnit, texUnit), aTexture, ScaleMode.StretchToFill, true);
-    //    }
-    //    else
-    //    {
-    //        //arrow.SetActive(true);
-    //        arrow.SetActive(false);
-
-    //    }
-
-    //}
 
     private void getDataFromScripts()
     {
@@ -102,18 +105,15 @@ public class HighlightController : MonoBehaviour
 
     }
 
-
-
-    IEnumerator fadeIn()
+    private void makeArrowInvisible()
     {
-        Debug.Log("Fade in");
-        for (float i = 0; i < fadeTime; i += Time.deltaTime)
-        {
-            Debug.Log("Fade in time");
-            arrow.GetComponent<Renderer>().material.color = Color.Lerp(fadedColor, solidColor, i / fadeTime);
-
-        }
-        Debug.Log("Fade in done");
-        yield return null;
+        arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 0);
     }
+
+
+    private void makeArrowVisible()
+    {
+        arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 50);
+    }
+
 }

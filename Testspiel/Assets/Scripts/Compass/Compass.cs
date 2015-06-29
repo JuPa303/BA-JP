@@ -226,7 +226,7 @@ public class Compass : MonoBehaviour
             if (rect.Contains(pointer.position))
             {
                 CompassGazeTimer+= Time.deltaTime * 1;
-                Debug.Log("looked at compass" + CompassGazeTimer);
+                //Debug.Log("looked at compass" + CompassGazeTimer);
             }
             //Debug.Log("pointerPos" + pointer.position);  
 

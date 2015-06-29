@@ -9,26 +9,38 @@ public class EyeTrackerData : GazeMonobehaviour
     //public bool showClue = false;
     Vector3 averageGazePosition, vectorToClue2D, vectorToGaze;
     Vector2 gazePos, gazePoint1, gazePoint2;
-    GameObject objectInFocus, clue, player;
+
+    private GameObject objectInFocus;
+    private GameObject clue;
+    private GameObject player;
+    private GameObject data;
     SampleData sample;
-    private bool hasFirstPoint = false;
+
     private float angle = 0f;
 
     public bool hasToWait = false;
-
     public bool isChosen = false;
+    private bool hasFirstPoint = false;
+    public bool quitCounting = false;
+
+    private bool stopShowing;
 
     public delegate void cueHandler(bool isShown);
     public event cueHandler OnClueStatus = delegate { };
 
-    int calibrationType = 5;
-    private bool didCalibration = false;
+    public HighlightController highContr;
+   
+   
 
-    public GameObject timer;
-    private GameObject data;
+    //int calibrationType = 5;
+    //private bool didCalibration = false;
+
+    // public GameObject timer;
+
 
     public float gazeTimeCounter = 0.0f;
-    public bool quitCounting = false;
+    public float killTimer = 0.0f;
+
 
 
 
@@ -39,7 +51,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
         OnClueStatus(false);
         data = GameObject.FindGameObjectWithTag("Data");
-
+        highContr = Camera.main.GetComponent<HighlightController>();
 
     }
 
@@ -47,85 +59,43 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isChosen == true)
-        {
+        //if (isChosen == true)
+        //{
 
-            calibrateET();
+        //calibrateET();
 
-            clue = GetComponent<FindClosestClue>().FindClue();
-            sample = SMIGazeController.Instance.GetSample();
-            gazePos = sample.averagedEye.gazePosInScreenCoords();
-
-            checkGazeOnObject();
-            getGazes();
-
-        }
-
-    }
-
-
-    //not wait because players are too fast
-    public IEnumerator waitToDisplayClues()
-    {
-
-        yield return new WaitForSeconds(3f); // waits 3 seconds
-        hasToWait = false;
+        clue = GetComponent<FindClosestClue>().FindClue();
+        sample = SMIGazeController.Instance.GetSample();
+        gazePos = sample.averagedEye.gazePosInScreenCoords();
+        checkGazeTime();
+        checkGazeOnObject();
+        getGazes();
+        //Debug.Log("isKilled" + highContr.arrowIsKilled);
+        //}
 
     }
 
-    private void calibrateET()
-    {
-        if (didCalibration == false)
-        {
-
-            SMIGazeController.Instance.StartCalibration(calibrationType);
-            didCalibration = true;
-
-        }
-
-    }
 
     private void getGazes()
     {
 
         //Debugmode is Active
-        if (isMouseModusActive == false)
+
+
+        if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
         {
-            if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
-            {
 
-                gazePoint1 = sample.averagedEye.gazePosInScreenCoords();
-                hasFirstPoint = true;
+            gazePoint1 = sample.averagedEye.gazePosInScreenCoords();
+            hasFirstPoint = true;
 
-            }
-            else
-            {
-                gazePoint2 = sample.averagedEye.gazePosInScreenCoords();
-                // gazePoint2 = sample.averagedEye.eyePosition;
-                //Debug.Log("gazePoint2 " + gazePoint2);
-                calcDirection();
-            }
         }
-
-            //DebugMode
         else
         {
-            if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
-            {
-
-                gazePoint1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                hasFirstPoint = true;
-                Debug.Log("mouse pos1" + gazePoint1);
-
-            }
-            else
-            {
-
-                gazePoint2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Debug.Log("mouse pos2" + gazePoint2);
-                calcDirection();
-            }
+            gazePoint2 = sample.averagedEye.gazePosInScreenCoords();
+            calcDirection();
         }
+
+
 
     }
 
@@ -199,7 +169,8 @@ public class EyeTrackerData : GazeMonobehaviour
                 if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
                 {
                     gazeTimeCounter += Time.deltaTime * 1;
-                   
+                    killTimer += Time.deltaTime * 1;
+
                 }
                 if (quitCounting == true)
                 {
@@ -210,10 +181,10 @@ public class EyeTrackerData : GazeMonobehaviour
 
             }
 
-            //else
-            //{
-            //    Debug.Log("gaze  not on clue");
-            //}
+            else
+            {
+                killTimer = 0;
+            }
         }
 
         catch (System.Exception e)
@@ -224,6 +195,16 @@ public class EyeTrackerData : GazeMonobehaviour
 
     }
 
+
+    private void checkGazeTime()
+    {
+        if (killTimer >= 0.3f)
+        {
+            highContr.arrowIsKilled = true;
+            //OnClueStatus(false);
+        }
+
+    }
 
 
     //draw gaze as rectangle
