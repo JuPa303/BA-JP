@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CompassEnd : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class CompassEnd : MonoBehaviour {
     private GameObject player;
     private GameObject data;
     private GameObject compass;
+    private GameObject coins;
+    public Text counter;
 
     // Use this for initialization
     void Start()
@@ -18,6 +21,7 @@ public class CompassEnd : MonoBehaviour {
         end.SetActive(false);
         data = GameObject.FindGameObjectWithTag("Data");
         compass = GameObject.FindGameObjectWithTag("Compass");
+        coins = GameObject.FindGameObjectWithTag("Coins");
     }
 
     // Update is called once per frame
@@ -44,6 +48,9 @@ public class CompassEnd : MonoBehaviour {
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
         data.GetComponent<Filewriter>().gazeTimeCounter = compass.GetComponent<Compass>().CompassGazeTimer;
+
+
+        counter.text = "" + coins.GetComponent<CoinCounter>().counter;
 
 
 

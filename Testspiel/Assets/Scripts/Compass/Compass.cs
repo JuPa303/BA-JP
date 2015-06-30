@@ -17,46 +17,39 @@ public class Compass : MonoBehaviour
 
     private Rect rect;
 
-    //tex width = 128
-    private float thresholdOutside = 30.0f;
-    private float thresholdInside = 50.0f;
-
     private Vector3 arrowPos;
 
     private float currentNumber;
-    private bool hasPos = false;
     private float texHeight; //tex is square
+    public float CompassGazeTimer = 0.0f;
+    private float thresholdOutside = 30.0f;
+    private float thresholdInside = 50.0f;
+
 
     public bool isChosen;
+    private bool hasPos = false;
 
-
-    public float CompassGazeTimer = 0.0f;
 
 
 
     void Start()
     {
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         target = GameObject.Find("RoomTrigger0");
-        //texHeight = arrowUp.height;
         //arrowUp.height = 128
 
         texHeight = 30.0f;
         rect = new Rect(Screen.width * 0.5f, Screen.height * 0.5f, texHeight, texHeight);
-        //Debug.Log("ScreenWidth" + Screen.width);
-
 
     }
 
     void OnGUI()
     {
-        //if (isChosen == true)
-        //{
+
         getArrowPos();
-        //Debug.Log("arrowPos.x " + arrowPos.x);
-        //Debug.Log("arrowPos.y " + arrowPos.y);
-        //}
+
     }
 
     void Update()
@@ -216,19 +209,17 @@ public class Compass : MonoBehaviour
     private void checkGazeOnArrow()
     {
         //Create A PointerEvent for a Screenspace Canvas
-            PointerEventData pointer = new PointerEventData(EventSystem.current);
-            pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInScreenCoords();
+        PointerEventData pointer = new PointerEventData(EventSystem.current);
+        pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInScreenCoords();
 
-            //Safe the Raycast
-            var raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointer, raycastResults);
+        //Safe the Raycast
+        var raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, raycastResults);
 
-            if (rect.Contains(pointer.position))
-            {
-                CompassGazeTimer+= Time.deltaTime * 1;
-                //Debug.Log("looked at compass" + CompassGazeTimer);
-            }
-            //Debug.Log("pointerPos" + pointer.position);  
+        if (rect.Contains(pointer.position))
+        {
+            CompassGazeTimer += Time.deltaTime * 1;
+        }
 
     }
 }

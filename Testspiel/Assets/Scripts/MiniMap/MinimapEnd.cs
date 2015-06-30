@@ -11,6 +11,9 @@ public class MinimapEnd : MonoBehaviour
     private GameObject data;
     private Animation danceAnim;
     private GameObject mapArea;
+    private GameObject coins;
+
+    public Text counter;
 
 
 
@@ -24,6 +27,7 @@ public class MinimapEnd : MonoBehaviour
 
         data = GameObject.FindGameObjectWithTag("Data");
         mapArea = GameObject.FindGameObjectWithTag("MapArea");
+        coins = GameObject.FindGameObjectWithTag("Coins");
 
         end.SetActive(false);
     }
@@ -54,7 +58,7 @@ public class MinimapEnd : MonoBehaviour
         data.GetComponent<Filewriter>().gazeTimeCounter = mapArea.transform.GetChild(0).gameObject.GetComponent<GazeArea>().mapGazeTimer;
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
-
+        counter.text = ""+ coins.GetComponent<CoinCounter>().counter;
 
 
     }

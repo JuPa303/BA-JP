@@ -10,7 +10,6 @@ public class HighlightController : MonoBehaviour
     private bool isClosestAndSeen;
     private bool isBlockedByWall;
     private bool showClue;
-
     public bool arrowIsKilled;
 
     public EyeTrackerData eyeData;
@@ -25,18 +24,12 @@ public class HighlightController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+
         player = GameObject.FindGameObjectWithTag("Player");
-
-
-
         eyeData = player.GetComponent<EyeTrackerData>();
         getDataFromScripts();
         eyeData.OnClueStatus += setClueStatus;
-        
 
-
-        //arrow.SetActive(false);
 
     }
 
@@ -45,7 +38,7 @@ public class HighlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log("killed " + arrowIsKilled);
+        // Debug.Log("killed " + arrowIsKilled);
         if (arrowIsKilled == false)
         {
             getDataFromScripts();
@@ -60,7 +53,7 @@ public class HighlightController : MonoBehaviour
             //no wall between Player and clue 
 
 
-           
+
             if (showClue)
             {
                 if (arrowIsKilled == true)
@@ -70,13 +63,12 @@ public class HighlightController : MonoBehaviour
                 else
                 {
                     makeArrowVisible();
-                    //arrow.SetActive(true);
+
                 }
-                //StartCoroutine(fadeIn());
+
             }
             else
             {
-                //arrow.SetActive(false);
                 makeArrowInvisible();
             }
 
@@ -101,7 +93,7 @@ public class HighlightController : MonoBehaviour
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         arrow = clue.transform.GetChild(0).gameObject;
-        //arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 80);
+
 
     }
 

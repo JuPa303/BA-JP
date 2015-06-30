@@ -16,6 +16,9 @@ public class MapCamera : MonoBehaviour
         mapCamera = gameObject.GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     // Map stays the same size even on different screens, it's square

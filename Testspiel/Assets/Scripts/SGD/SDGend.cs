@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SDGend : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SDGend : MonoBehaviour
     private GameObject end;
     private GameObject player;
     private GameObject data;
+    private GameObject coins;
+    public Text counter;
 
     // Use this for initialization
     void Start()
@@ -20,6 +23,7 @@ public class SDGend : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         end.SetActive(false);
         data = GameObject.FindGameObjectWithTag("Data");
+
     }
 
     // Update is called once per frame
@@ -47,6 +51,8 @@ public class SDGend : MonoBehaviour
 
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
         data.GetComponent<Filewriter>().gazeTimeCounter = player.GetComponent<EyeTrackerData>().gazeTimeCounter;
+
+        counter.text = "" + coins.GetComponent<CoinCounter>().counter;
 
 
     }
