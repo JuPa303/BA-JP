@@ -198,7 +198,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     private void checkGazeTime()
     {
-        if (killTimer >= 0.3f)
+        if (killTimer >= 0.25f)
         {
             highContr.arrowIsKilled = true;
             //OnClueStatus(false);

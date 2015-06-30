@@ -1,3 +1,0 @@
-Level: SGD2
-Time needed in this Level: 263.22 seconds
-Gaze on navigation clues: 1.127461 seconds

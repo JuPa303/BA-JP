@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class CoinScript : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class CoinScript : MonoBehaviour
     private double maxX;
     private double maxY;
 
+
+    public Text helpText;
+
     private GameObject coinCounter;
 
     private bool isSelected = false;
@@ -22,83 +27,52 @@ public class CoinScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         coinCounter = GameObject.FindGameObjectWithTag("Coins");
-        //Safe the DefaultScale of the Item
         startScale = transform.localScale;
-        //Init the Scalefactors
         scaleDestination = startScale;
         coin = this.gameObject;
-        //Debug.Log("minx "+ minX +"miny "+ minY +"maxX "+ maxX +"maxY "+ maxY );
+        helpText.enabled = false;
+
     }
 
     void Update()
     {
+
         transform.localScale = Vector3.Lerp(transform.localScale, scaleDestination, 0.1f);
 
-        checkPosition();
+        if (coinCounter.GetComponent<CoinCounter>().counter > 0)
+        {
+            helpText.text = "";
+        }
+
+
+
+    }
+
+
+
+    private void OnTriggerEnter()
+    {
+
+        scaleDestination = Vector3.one * highlightScaleFactor;
+        isSelected = true;
+        helpText.enabled = true;
+        
+
+    }
+
+    private void OnTriggerStay()
+    {
         grabCoin();
     }
 
- 
-
-
-
-    IEnumerator DecreaseSize()
+    private void OnTriggerExit()
     {
-        yield return new WaitForSeconds(0.25f);
         scaleDestination = startScale;
+        isSelected = false;
+        helpText.enabled = false;
 
     }
 
-    private void checkPosition()
-    {
-        setValues();
-        //Debug.Log("minx " + minX + "miny " + minY + "maxX " + maxX + "maxY " + maxY);
-        //Debug.Log(Screen.width*0.17);
-
-
-        Vector3 targetPos = Camera.main.WorldToScreenPoint(coin.transform.position);
-        Vector3 playerPos = Camera.main.WorldToScreenPoint(player.transform.position);
-        //Debug.Log("height" + Screen.height);
-        //Debug.Log("width" + Screen.width);
-        //Debug.Log(targetPos);
-        float distance = Vector2.Distance(player.transform.position, coin.transform.position);
-        //Debug.Log("Distance" + distance);
-
-        if ((targetPos.x >= minX) && (targetPos.x <= maxX))
-        {
-            if ((targetPos.y >= minY) && (targetPos.y <= maxY))
-            {
-                if (distance >= 0.5 && distance <= 1.2)
-                {
-                    //Debug.Log("true");
-                    scaleDestination = Vector3.one * highlightScaleFactor;
-                    isSelected = true;
-                }
-            }
-            else
-            {
-                scaleDestination = startScale;
-                isSelected = false;
-
-            }
-        }
-        else
-        {
-            scaleDestination = startScale;
-            isSelected = false;
-        }
-    }
-
-
-    private void setValues()
-    {
-
-        minX = (Screen.width / 2) - (Screen.width * 0.17);
-        maxX = (Screen.width / 2) + (Screen.width * 0.17);
-
-        minY = (Screen.height / 2) - (Screen.height * 0.17);
-        maxY = (Screen.height / 2) + (Screen.height * 0.17);
-    }
 
 
     private void grabCoin()
@@ -106,12 +80,18 @@ public class CoinScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("e pressed");
             if (isSelected == true)
             {
-                Debug.Log("Grab!");
                 coinCounter.GetComponent<CoinCounter>().counter++;
                 coin.SetActive(false);
+                scaleDestination = startScale;
+                isSelected = false;
+                helpText.enabled = false;
             }
         }
     }
+
+
+
 }

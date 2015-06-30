@@ -54,10 +54,6 @@ public class FirstPersonController : MonoBehaviour
         if (characterController.isGrounded && Input.GetButtonDown("Jump"))
         {
             navAgent.enabled = false;
-           // GetComponent<Rigidbody>().isKinematic = false;
-           // GetComponent<Rigidbody>().useGravity = true;
-           // GetComponent<Rigidbody>().AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
-           // GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 5, 0), ForceMode.Impulse);
             verticalVelocity = jumpSpeed;
             //navAgent.Resume();
 

@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
 
         counterText.text = "" + counter;
         StartCoroutine(countdown());
+       
 
 
     }
