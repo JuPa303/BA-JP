@@ -22,6 +22,7 @@ public class EyeTrackerData : GazeMonobehaviour
     public bool isChosen = false;
     private bool hasFirstPoint = false;
     public bool quitCounting = false;
+    private bool isFocused = false;
 
     private bool stopShowing;
 
@@ -29,8 +30,8 @@ public class EyeTrackerData : GazeMonobehaviour
     public event cueHandler OnClueStatus = delegate { };
 
     public HighlightController highContr;
-   
-   
+
+
 
     //int calibrationType = 5;
     //private bool didCalibration = false;
@@ -40,6 +41,8 @@ public class EyeTrackerData : GazeMonobehaviour
 
     public float gazeTimeCounter = 0.0f;
     public float killTimer = 0.0f;
+    private float killingTime = 0.27f;
+    public int gazeCounter = 0;
 
 
 
@@ -73,6 +76,9 @@ public class EyeTrackerData : GazeMonobehaviour
         //Debug.Log("isKilled" + highContr.arrowIsKilled);
         //}
 
+
+        Debug.Log("counter" + gazeCounter);
+        Debug.Log("focused" + isFocused);
     }
 
 
@@ -170,6 +176,14 @@ public class EyeTrackerData : GazeMonobehaviour
                 {
                     gazeTimeCounter += Time.deltaTime * 1;
                     killTimer += Time.deltaTime * 1;
+                    if (!isFocused)
+                    {
+                        gazeCounter++;
+                        isFocused = true;
+                      
+
+                    }
+                   
 
                 }
                 if (quitCounting == true)
@@ -177,13 +191,18 @@ public class EyeTrackerData : GazeMonobehaviour
                     data.GetComponent<Filewriter>().gazeTimeCounter = gazeTimeCounter;
                 }
 
-                //Debug.Log("gaze on clue");
+              
 
+                //Debug.Log("gaze on clue");
+                
             }
 
             else
             {
                 killTimer = 0;
+                isFocused = false;
+                      
+               
             }
         }
 
@@ -198,7 +217,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     private void checkGazeTime()
     {
-        if (killTimer >= 0.25f)
+        if (killTimer >= killingTime)
         {
             highContr.arrowIsKilled = true;
             //OnClueStatus(false);

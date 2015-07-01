@@ -16,19 +16,22 @@ public class Compass : MonoBehaviour
     public Texture2D arrowDown;
 
     private Rect rect;
+    private Rect gazeRect;
 
     private Vector3 arrowPos;
 
     private float currentNumber;
     private float texHeight; //tex is square
-    public float CompassGazeTimer = 0.0f;
+    public float compassGazeTimer = 0.0f;
     private float thresholdOutside = 30.0f;
     private float thresholdInside = 50.0f;
 
 
     public bool isChosen;
     private bool hasPos = false;
+    private bool isFocused = false;
 
+    public int gazeCounter = 0;
 
 
 
@@ -55,6 +58,8 @@ public class Compass : MonoBehaviour
     void Update()
     {
         checkGazeOnArrow();
+        Debug.Log("counter" + gazeCounter);
+        Debug.Log("Gazetime" + compassGazeTimer);
     }
 
 
@@ -208,6 +213,8 @@ public class Compass : MonoBehaviour
 
     private void checkGazeOnArrow()
     {
+
+        gazeRect = new Rect(rect.x, rect.y, texHeight*3, texHeight*3);
         //Create A PointerEvent for a Screenspace Canvas
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInScreenCoords();
@@ -216,9 +223,20 @@ public class Compass : MonoBehaviour
         var raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointer, raycastResults);
 
-        if (rect.Contains(pointer.position))
+        if (gazeRect.Contains(pointer.position))
         {
-            CompassGazeTimer += Time.deltaTime * 1;
+            Debug.Log("Gaze");
+            compassGazeTimer += Time.deltaTime * 1;
+            if (!isFocused)
+            {
+                gazeCounter++;
+                
+                isFocused = true;
+            }
+        }
+        else
+        {
+            isFocused = false;
         }
 
     }

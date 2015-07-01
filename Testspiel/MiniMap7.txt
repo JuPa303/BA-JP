@@ -1,3 +1,0 @@
-Level: MiniMap
-Time needed in this Level: 67.43 seconds
-Gaze on navigation clues: 0 seconds

@@ -13,6 +13,7 @@ public class Filewriter : MonoBehaviour
 
     private int sceneCounter = 0;
     public float gazeTimeCounter = 0.0f;
+    public int gazeCounter = 0;
 
     private StreamWriter sr;
 
@@ -52,6 +53,7 @@ public class Filewriter : MonoBehaviour
             sr.WriteLine("Level: " + sceneName);
             sr.WriteLine("Time needed in this Level: " + time + " seconds");
             sr.WriteLine("Gaze on navigation clues: " + gazeTimeCounter + " seconds");
+            sr.WriteLine("Number of gazes on navigation clues: " + gazeTimeCounter + " seconds");
 
             sr.Close();
             countingEnds = false;

@@ -15,6 +15,7 @@ public class StartGame : MonoBehaviour {
         systemMenue = GameObject.Find("StartScreen");
         mainMenue = GameObject.FindGameObjectWithTag("MainMenue");
         controlMenue = GameObject.FindGameObjectWithTag("ControlMenue");
+       
         systemMenue.SetActive(false);
         controlMenue.SetActive(false);
 	}
@@ -42,6 +43,11 @@ public class StartGame : MonoBehaviour {
     {
         controlMenue.SetActive(true);
         mainMenue.SetActive(false);
+    }
+
+    public void testControls()
+    {
+        Application.LoadLevel("Testumgebung");
     }
 }
 

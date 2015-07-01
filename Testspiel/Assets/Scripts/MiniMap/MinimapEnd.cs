@@ -28,6 +28,7 @@ public class MinimapEnd : MonoBehaviour
         data = GameObject.FindGameObjectWithTag("Data");
         mapArea = GameObject.FindGameObjectWithTag("MapArea");
         coins = GameObject.FindGameObjectWithTag("Coins");
+    
 
         end.SetActive(false);
     }
@@ -56,6 +57,7 @@ public class MinimapEnd : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         danceAnim.Play();
         data.GetComponent<Filewriter>().gazeTimeCounter = mapArea.transform.GetChild(0).gameObject.GetComponent<GazeArea>().mapGazeTimer;
+        data.GetComponent<Filewriter>().gazeCounter = mapArea.transform.GetChild(0).gameObject.GetComponent<GazeArea>().counter;
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
         counter.text = ""+ coins.GetComponent<CoinCounter>().counter;

@@ -14,12 +14,14 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
     public int counter;
     private Rect rect;
 
+    private GameObject area;
+
     private GazeArea oldSelection;
 
     // Use this for initialization
     void Start()
     {
-
+        area = GameObject.FindGameObjectWithTag("MapArea");
     }
 
     // Update is called once per frame
@@ -54,19 +56,15 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
 
                 item.OnGazeEnter();
             }
+            
+           
         }
-    }
-
-
-    private void increaseCounter()
-    {
-
-        if (increasing == true)
+        else
         {
-            counter++;
-            increasing = false;
-            //Debug.Log("Counter " + counter);
+            area.GetComponentInChildren<GazeArea>().isFocused = false;
         }
+
+      
     }
 
 

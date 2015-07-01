@@ -59,7 +59,6 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\Compass\Compass.cs" />
      <Compile Include="Assets\Scripts\Compass\CompassEnd.cs" />
-     <Compile Include="Assets\Scripts\Compass\GazeOnCompass.cs" />
      <Compile Include="Assets\Scripts\MiniMap\EyetrackerGazeCounter.cs" />
      <Compile Include="Assets\Scripts\MiniMap\GazeArea.cs" />
      <Compile Include="Assets\Scripts\MiniMap\MapCamera.cs" />
@@ -74,6 +73,7 @@
      <Compile Include="Assets\Scripts\Other\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\Other\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\Other\StartGame.cs" />
+     <Compile Include="Assets\Scripts\Other\TestControlScript.cs" />
      <Compile Include="Assets\Scripts\Other\TimeKeeper.cs" />
      <Compile Include="Assets\Scripts\Other\TriggerScript.cs" />
      <Compile Include="Assets\Scripts\SGD\ArrowTrigger.cs" />

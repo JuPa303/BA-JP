@@ -51,6 +51,7 @@ public class SDGend : MonoBehaviour
 
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
         data.GetComponent<Filewriter>().gazeTimeCounter = player.GetComponent<EyeTrackerData>().gazeTimeCounter;
+        data.GetComponent<Filewriter>().gazeCounter = player.GetComponent<EyeTrackerData>().gazeCounter;
 
         counter.text = "" + coins.GetComponent<CoinCounter>().counter;
 

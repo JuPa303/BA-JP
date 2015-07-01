@@ -47,7 +47,8 @@ public class CompassEnd : MonoBehaviour {
 
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
-        data.GetComponent<Filewriter>().gazeTimeCounter = compass.GetComponent<Compass>().CompassGazeTimer;
+        data.GetComponent<Filewriter>().gazeTimeCounter = compass.GetComponent<Compass>().compassGazeTimer;
+        data.GetComponent<Filewriter>().gazeCounter = compass.GetComponent<Compass>().gazeCounter;
 
 
         counter.text = "" + coins.GetComponent<CoinCounter>().counter;
