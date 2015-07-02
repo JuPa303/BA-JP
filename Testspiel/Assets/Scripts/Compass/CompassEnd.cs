@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CompassEnd : MonoBehaviour {
-
+public class CompassEnd : MonoBehaviour
+{
 
     private int system = 3;
     private GameObject end;
@@ -50,10 +50,7 @@ public class CompassEnd : MonoBehaviour {
         data.GetComponent<Filewriter>().gazeTimeCounter = compass.GetComponent<Compass>().compassGazeTimer;
         data.GetComponent<Filewriter>().gazeCounter = compass.GetComponent<Compass>().gazeCounter;
 
-
         counter.text = "" + coins.GetComponent<CoinCounter>().counter;
-
-
 
     }
 

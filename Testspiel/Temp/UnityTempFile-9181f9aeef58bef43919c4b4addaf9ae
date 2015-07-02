@@ -84,6 +84,7 @@ Assets/Scripts/Other/PauseGame.cs
 Assets/Scripts/Other/RoomEnter.cs
 Assets/Scripts/Other/SetRenderQueue.cs
 Assets/Scripts/Other/StartGame.cs
+Assets/Scripts/Other/TestControlScript.cs
 Assets/Scripts/Other/TimeKeeper.cs
 Assets/Scripts/Other/TriggerScript.cs
 Assets/Scripts/SGD/ArrowTrigger.cs

@@ -158,7 +158,6 @@ public class Compass : MonoBehaviour
         {
             if ((arrowPos.x >= thresholdInside) && (arrowPos.y < Screen.height) && (arrowPos.x <= (Screen.width - thresholdInside - texHeight)))
             {
-                //Debug.Log("Mitte unten");
 
                 //z.Pos gets smaller
                 if (arrowPos.z < currentNumber)
@@ -192,7 +191,6 @@ public class Compass : MonoBehaviour
             else if (arrowPos.x + texHeight > Screen.width)
             {
                 arrowPos.x = Screen.width - thresholdOutside - texHeight;
-                //Debug.Log("draw right arrow");
                 drawArrow(arrowRight);
             }
         }
@@ -214,7 +212,7 @@ public class Compass : MonoBehaviour
     private void checkGazeOnArrow()
     {
 
-        gazeRect = new Rect(rect.x, rect.y, texHeight*3, texHeight*3);
+        gazeRect = new Rect(rect.x, rect.y, texHeight * 3, texHeight * 3);
         //Create A PointerEvent for a Screenspace Canvas
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInScreenCoords();
@@ -230,7 +228,7 @@ public class Compass : MonoBehaviour
             if (!isFocused)
             {
                 gazeCounter++;
-                
+
                 isFocused = true;
             }
         }

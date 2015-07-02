@@ -21,8 +21,6 @@ public class ArrowTrigger : MonoBehaviour
 
         if (collider.tag == "Player")
         {
-
-
             highContr.arrowIsKilled = false;
 
         }

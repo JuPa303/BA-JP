@@ -25,7 +25,6 @@ public class ChooseSystem : MonoBehaviour
     private bool didCalibration = false;
 
 
-
     // Use this for initialization
     void Start()
     {

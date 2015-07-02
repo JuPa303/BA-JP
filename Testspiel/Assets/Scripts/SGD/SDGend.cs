@@ -7,8 +7,6 @@ public class SDGend : MonoBehaviour
     //This shows an End Screen if the player has reached his final Destination. 
     //Now he can choose between doing the other two navigation systems or quitting the game.
 
-
-
     private int system = 3;
     private GameObject end;
     private GameObject player;

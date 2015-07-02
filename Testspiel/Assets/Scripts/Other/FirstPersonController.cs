@@ -4,7 +4,7 @@ using System.Collections;
 public class FirstPersonController : MonoBehaviour
 {
 
-    private float movementSpeed = 3.0f;
+    private float movementSpeed = 3.5f;
     public float mouseSensitivity = 3.0f;
 
     public float jumpSpeed = 6.0f;
@@ -15,13 +15,13 @@ public class FirstPersonController : MonoBehaviour
 
     CharacterController characterController;
 
-     NavMeshAgent navAgent;
-    
+    NavMeshAgent navAgent;
+
 
     // Use this for initialization
     void Start()
     {
-       // Cursor.visible = false;
+        // Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
 
         characterController = GetComponent<CharacterController>();
@@ -55,36 +55,35 @@ public class FirstPersonController : MonoBehaviour
         {
             navAgent.enabled = false;
             verticalVelocity = jumpSpeed;
-            //navAgent.Resume();
-
-             StartCoroutine(wait());
+          
+            StartCoroutine(wait());
         }
 
         //Sprint
         if (characterController.isGrounded && Input.GetButton("Sprint"))
         {
 
-            movementSpeed = 8.0f;
+            movementSpeed = 7.0f;
         }
         else
         {
-            movementSpeed = 4.0f;
+            movementSpeed = 3.5f;
         }
 
         Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 
         speed = transform.rotation * speed;
         characterController.Move(speed * Time.deltaTime);
-      
+
 
     }
 
     IEnumerator wait()
     {
-         
+
         yield return new WaitForSeconds(1);
         navAgent.enabled = true;
-        
+
 
     }
 }

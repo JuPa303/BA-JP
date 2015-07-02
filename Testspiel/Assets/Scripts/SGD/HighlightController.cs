@@ -4,8 +4,8 @@ using System.Collections;
 public class HighlightController : MonoBehaviour
 {
     public Texture aTexture;
-    private Vector3 cluePos, viewportPos;
-    private GameObject clue, player;
+    private Vector3 cluePos;
+    private Vector3 viewportPos;
 
     private bool isClosestAndSeen;
     private bool isBlockedByWall;
@@ -15,6 +15,9 @@ public class HighlightController : MonoBehaviour
     public EyeTrackerData eyeData;
 
     private GameObject arrow;
+    private GameObject clue;
+    private GameObject player;
+
     private float fadeTime = 0.3f;
 
     private Color solidColor, fadedColor;
@@ -24,13 +27,10 @@ public class HighlightController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         player = GameObject.FindGameObjectWithTag("Player");
         eyeData = player.GetComponent<EyeTrackerData>();
         getDataFromScripts();
         eyeData.OnClueStatus += setClueStatus;
-
-
     }
 
 
@@ -52,8 +52,6 @@ public class HighlightController : MonoBehaviour
             //{
             //no wall between Player and clue 
 
-
-
             if (showClue)
             {
                 if (arrowIsKilled == true)
@@ -72,7 +70,6 @@ public class HighlightController : MonoBehaviour
                 makeArrowInvisible();
             }
 
-
         }
         else
         {
@@ -88,13 +85,10 @@ public class HighlightController : MonoBehaviour
     }
 
 
-
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         arrow = clue.transform.GetChild(0).gameObject;
-
-
     }
 
     private void makeArrowInvisible()

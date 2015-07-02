@@ -4,16 +4,15 @@ using System.Collections;
 public class FindClosestClue : MonoBehaviour
 {
     public GameObject closest;
-    private NavMeshAgent nav;
     private GameObject[] clues;
+    private NavMeshAgent nav;
+
 
     private void Start()
     {
-        
-        nav = GetComponent<NavMeshAgent>();
-       
-        clues = GameObject.FindGameObjectsWithTag("AOI");
 
+        nav = GetComponent<NavMeshAgent>();
+        clues = GameObject.FindGameObjectsWithTag("AOI");
         closest = FindClue();
     }
 
@@ -21,13 +20,13 @@ public class FindClosestClue : MonoBehaviour
     //returns the closest clue by calculating the distances
     public GameObject FindClue()
     {
-       
+
 
         float distance = Mathf.Infinity;
 
         foreach (GameObject go in clues)
         {
-            
+
             float curDistance = CalculatePathMesh(go.transform.position);
             go.transform.GetChild(0).gameObject.GetComponent<Renderer>().enabled = false;
             if (curDistance < distance)
@@ -35,7 +34,7 @@ public class FindClosestClue : MonoBehaviour
                 closest = go;
                 distance = curDistance;
             }
-         
+
         }
 
         closest.transform.GetChild(0).gameObject.GetComponent<Renderer>().enabled = true;
@@ -47,8 +46,6 @@ public class FindClosestClue : MonoBehaviour
     {
 
         closest = FindClue();
-       // Debug.Log("Closest " + closest);
-
     }
 
 
@@ -79,7 +76,6 @@ public class FindClosestClue : MonoBehaviour
         {
             pathLength += Vector3.Distance(allWayPoints[i], allWayPoints[i + 1]);
         }
-        //Debug.Log("pathlength" + pathLength);
 
         return pathLength;
 

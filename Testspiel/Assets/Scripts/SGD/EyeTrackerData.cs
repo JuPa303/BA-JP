@@ -6,7 +6,6 @@ public class EyeTrackerData : GazeMonobehaviour
 {
     public bool isMouseModusActive = false;
 
-    //public bool showClue = false;
     Vector3 averageGazePosition, vectorToClue2D, vectorToGaze;
     Vector2 gazePos, gazePoint1, gazePoint2;
 
@@ -23,7 +22,6 @@ public class EyeTrackerData : GazeMonobehaviour
     private bool hasFirstPoint = false;
     public bool quitCounting = false;
     private bool isFocused = false;
-
     private bool stopShowing;
 
     public delegate void cueHandler(bool isShown);
@@ -32,16 +30,9 @@ public class EyeTrackerData : GazeMonobehaviour
     public HighlightController highContr;
 
 
-
-    //int calibrationType = 5;
-    //private bool didCalibration = false;
-
-    // public GameObject timer;
-
-
     public float gazeTimeCounter = 0.0f;
     public float killTimer = 0.0f;
-    private float killingTime = 0.27f;
+    private float fixationTime = 0.15f;
     public int gazeCounter = 0;
 
 
@@ -62,10 +53,7 @@ public class EyeTrackerData : GazeMonobehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (isChosen == true)
-        //{
 
-        //calibrateET();
 
         clue = GetComponent<FindClosestClue>().FindClue();
         sample = SMIGazeController.Instance.GetSample();
@@ -73,12 +61,7 @@ public class EyeTrackerData : GazeMonobehaviour
         checkGazeTime();
         checkGazeOnObject();
         getGazes();
-        //Debug.Log("isKilled" + highContr.arrowIsKilled);
-        //}
 
-
-        Debug.Log("counter" + gazeCounter);
-        Debug.Log("focused" + isFocused);
     }
 
 
@@ -100,8 +83,6 @@ public class EyeTrackerData : GazeMonobehaviour
             gazePoint2 = sample.averagedEye.gazePosInScreenCoords();
             calcDirection();
         }
-
-
 
     }
 
@@ -170,20 +151,22 @@ public class EyeTrackerData : GazeMonobehaviour
             if (objectInFocus.tag == "AOI" || objectInFocus.tag == "Arrow")
             {
                 //clue = objectInFocus;
-                OnClueStatus(false);
+
 
                 if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
                 {
                     gazeTimeCounter += Time.deltaTime * 1;
                     killTimer += Time.deltaTime * 1;
+
                     if (!isFocused)
                     {
                         gazeCounter++;
                         isFocused = true;
-                      
+
 
                     }
-                   
+
+                    OnClueStatus(false);
 
                 }
                 if (quitCounting == true)
@@ -191,18 +174,18 @@ public class EyeTrackerData : GazeMonobehaviour
                     data.GetComponent<Filewriter>().gazeTimeCounter = gazeTimeCounter;
                 }
 
-              
+
 
                 //Debug.Log("gaze on clue");
-                
+
             }
 
             else
             {
                 killTimer = 0;
                 isFocused = false;
-                      
-               
+
+
             }
         }
 
@@ -217,7 +200,7 @@ public class EyeTrackerData : GazeMonobehaviour
 
     private void checkGazeTime()
     {
-        if (killTimer >= killingTime)
+        if (killTimer >= fixationTime)
         {
             highContr.arrowIsKilled = true;
             //OnClueStatus(false);

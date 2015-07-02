@@ -20,7 +20,6 @@ public class Filewriter : MonoBehaviour
     void Start()
     {
         sceneName = "" + Application.loadedLevelName;
-
         setFileName();
     }
 
@@ -28,7 +27,7 @@ public class Filewriter : MonoBehaviour
     void Update()
     {
         writeData();
-       
+
     }
 
     private void setFileName()
@@ -53,7 +52,7 @@ public class Filewriter : MonoBehaviour
             sr.WriteLine("Level: " + sceneName);
             sr.WriteLine("Time needed in this Level: " + time + " seconds");
             sr.WriteLine("Gaze on navigation clues: " + gazeTimeCounter + " seconds");
-            sr.WriteLine("Number of gazes on navigation clues: " + gazeTimeCounter + " seconds");
+            sr.WriteLine("Number of gazes on navigation clues: " + gazeCounter + " times");
 
             sr.Close();
             countingEnds = false;

@@ -37,7 +37,6 @@ public class Timer : MonoBehaviour
 
             counter -= 1;
             counterText.text = counter.ToString();
-            //Debug.Log(counter);
         }
 
 

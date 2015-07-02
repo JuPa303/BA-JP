@@ -5,16 +5,18 @@ using UnityEngine.UI;
 public class MinimapEnd : MonoBehaviour
 {
     private int system = 3;
+
     private GameObject end;
     private GameObject player;
     private GameObject skeleton;
     private GameObject data;
-    private Animation danceAnim;
+
     private GameObject mapArea;
     private GameObject coins;
 
     public Text counter;
 
+    private Animation danceAnim;
 
 
     // Use this for initialization
@@ -24,11 +26,10 @@ public class MinimapEnd : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         skeleton = GameObject.FindGameObjectWithTag("Skeleton");
         danceAnim = skeleton.GetComponent<Animation>();
-
         data = GameObject.FindGameObjectWithTag("Data");
         mapArea = GameObject.FindGameObjectWithTag("MapArea");
         coins = GameObject.FindGameObjectWithTag("Coins");
-    
+
 
         end.SetActive(false);
     }
@@ -60,7 +61,7 @@ public class MinimapEnd : MonoBehaviour
         data.GetComponent<Filewriter>().gazeCounter = mapArea.transform.GetChild(0).gameObject.GetComponent<GazeArea>().counter;
         data.GetComponent<TimeKeeper>().TimerIsRunning = false;
 
-        counter.text = ""+ coins.GetComponent<CoinCounter>().counter;
+        counter.text = "" + coins.GetComponent<CoinCounter>().counter;
 
 
     }

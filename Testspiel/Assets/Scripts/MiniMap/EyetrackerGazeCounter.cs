@@ -34,20 +34,15 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
     private void checkGazeOnMap()
     {
 
-
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = SMIGazeController.Instance.GetSample().averagedEye.gazePosInUnityScreenCoords();
 
         //Safe the Raycast
         var raycastResults = new List<RaycastResult>();
-
-
-
         EventSystem.current.RaycastAll(pointer, raycastResults);
 
         if (raycastResults.Count > 0)
         {
-
 
             GazeArea item = raycastResults[0].gameObject.GetComponent<GazeArea>();
 
@@ -56,17 +51,13 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
 
                 item.OnGazeEnter();
             }
-            
-           
+
         }
         else
         {
             area.GetComponentInChildren<GazeArea>().isFocused = false;
         }
 
-      
     }
-
-
 
 }
