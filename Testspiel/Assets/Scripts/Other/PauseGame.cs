@@ -7,6 +7,8 @@ public class PauseGame : MonoBehaviour
     private bool showWindow;
     private GameObject pauseMenue;
     private GameObject player;
+    private GameObject eyeTrackerController;
+
 
     // Use this for initialization
     void Start()
@@ -14,6 +16,7 @@ public class PauseGame : MonoBehaviour
 
         pauseMenue = GameObject.FindGameObjectWithTag("PauseMenue");
         player = GameObject.FindGameObjectWithTag("Player");
+        eyeTrackerController = GameObject.FindGameObjectWithTag("GazeController");
         pauseMenue.SetActive(false);
     }
 
@@ -39,8 +42,9 @@ public class PauseGame : MonoBehaviour
 
     public void backToMainMenue()
     {
-        Debug.Log("go back to menue");
-        player.GetComponent<EyeTrackerData>().isChosen = false;
+       // Debug.Log("go back to menue");
+        //player.GetComponent<EyeTrackerData>().isChosen = false;
+        //eyeTrackerController.SetActive(false);
 
         Application.LoadLevel("Start");
     }

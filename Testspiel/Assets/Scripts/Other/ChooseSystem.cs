@@ -59,7 +59,7 @@ public class ChooseSystem : MonoBehaviour
     public void pressStart()
     {
 
-        calibrateET();
+       // calibrateET();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 

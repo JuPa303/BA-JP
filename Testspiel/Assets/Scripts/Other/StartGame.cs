@@ -52,5 +52,10 @@ public class StartGame : MonoBehaviour
     {
         Application.LoadLevel("Testumgebung");
     }
+
+    public void exitGame()
+    {
+        Application.Quit();
+    }
 }
 

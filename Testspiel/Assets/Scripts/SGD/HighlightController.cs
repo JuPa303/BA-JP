@@ -42,6 +42,7 @@ public class HighlightController : MonoBehaviour
         if (arrowIsKilled == false)
         {
             getDataFromScripts();
+            arrow.SetActive(true);
 
             cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
             viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
@@ -54,15 +55,10 @@ public class HighlightController : MonoBehaviour
 
             if (showClue)
             {
-                if (arrowIsKilled == true)
-                {
-                    arrow.SetActive(false);
-                }
-                else
-                {
+               
                     makeArrowVisible();
 
-                }
+                
 
             }
             else
