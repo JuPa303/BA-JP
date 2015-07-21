@@ -5,6 +5,10 @@ using UnityEngine.UI;
 public class CompassEnd : MonoBehaviour
 {
 
+    /* 
+     * The end screen if the player reaches the end of the compass level.
+     */
+
     private int system = 3;
     private GameObject end;
     private GameObject player;
@@ -13,7 +17,9 @@ public class CompassEnd : MonoBehaviour
     private GameObject coins;
     public Text counter;
 
-    // Use this for initialization
+
+
+    //different necessary gameObjects will be initialized
     void Start()
     {
         end = GameObject.FindGameObjectWithTag("End");
@@ -38,6 +44,9 @@ public class CompassEnd : MonoBehaviour
 
 
     }
+
+
+    //if the player touches the trigger in the final room, the cursor can be used for choosing the next level. 
     private void OnTriggerEnter(Collider collider)
     {
         player.GetComponent<FirstPersonController>().enabled = false;

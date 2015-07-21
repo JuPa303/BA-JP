@@ -1,0 +1,7 @@
+Level: Compass
+Cancelled
+Time needed in this Level: 2.040.230 seconds
+Gaze on navigation clues: 7.8738122 seconds
+Number of gazes on navigation clues: 20 times
+Level Number: 2
+Coins: 11

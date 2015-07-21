@@ -1,0 +1,6 @@
+Level: MiniMap
+Time needed in this Level: 322.90 seconds
+Gaze on navigation clues: 2.86415 seconds
+Number of gazes on navigation clues: 72 times
+Level Number: 3
+Coins: 14

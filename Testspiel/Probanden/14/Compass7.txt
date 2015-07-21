@@ -1,0 +1,6 @@
+Level: Compass
+Time needed in this Level: 205.14 seconds
+Gaze on navigation clues: 0 seconds
+Number of gazes on navigation clues: 0 times
+Level Number: 3
+Coins: 13

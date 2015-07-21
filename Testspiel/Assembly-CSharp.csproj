@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PlayerManager.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\EventSystemChecker.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
@@ -70,6 +69,7 @@
      <Compile Include="Assets\Scripts\Other\FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\Other\GameController.cs" />
      <Compile Include="Assets\Scripts\Other\PauseGame.cs" />
+     <Compile Include="Assets\Scripts\Other\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Other\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\Other\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\Other\StartGame.cs" />
@@ -83,7 +83,6 @@
      <Compile Include="Assets\Scripts\SGD\FindClosestClue.cs" />
      <Compile Include="Assets\Scripts\SGD\HighlightController.cs" />
      <Compile Include="Assets\Scripts\SGD\SDGend.cs" />
-     <Compile Include="Assets\Scripts\SGD\Timer.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

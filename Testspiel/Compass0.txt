@@ -1,4 +1,0 @@
-Level: Compass
-Time needed in this Level: 55.74 seconds
-Gaze on navigation clues: 0 seconds
-Number of gazes on navigation clues: 0 times

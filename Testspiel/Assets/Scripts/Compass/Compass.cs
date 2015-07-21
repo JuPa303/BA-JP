@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using iView;
 
+/* This class is the heart of the compass. The compass points always to the next room not caring about walls.
+ */
+
 public class Compass : MonoBehaviour
 {
 
@@ -35,6 +38,7 @@ public class Compass : MonoBehaviour
 
 
 
+    //Cursor gets locked and invisible, a new rect for the compass is created.
     void Start()
     {
         Cursor.visible = false;
@@ -55,15 +59,15 @@ public class Compass : MonoBehaviour
 
     }
 
+
+
     void Update()
     {
         checkGazeOnArrow();
-        Debug.Log("counter" + gazeCounter);
-        Debug.Log("Gazetime" + compassGazeTimer);
     }
 
 
-
+    //checks the position of the arrow so that the right sprite is painted
     private void getArrowPos()
     {
         Vector3 targetPos = Camera.main.WorldToScreenPoint(target.transform.position);
@@ -142,6 +146,8 @@ public class Compass : MonoBehaviour
 
     }
 
+
+    //if the correct room is behind the player, the arrow is displayed just at the bottom of the screen. 
     private void checkArrowPosBehindPlayer()
     {
 
@@ -197,6 +203,7 @@ public class Compass : MonoBehaviour
 
     }
 
+    // arrow gets correct positions and is drawn
     private void drawArrow(Texture2D arrow)
     {
 
@@ -208,7 +215,7 @@ public class Compass : MonoBehaviour
     }
 
 
-
+    //checks if the user is looking at the compass and changes variable isFocused if so.
     private void checkGazeOnArrow()
     {
 

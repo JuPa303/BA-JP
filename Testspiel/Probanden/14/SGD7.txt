@@ -1,0 +1,6 @@
+Level: SGD
+Time needed in this Level: 372.49 seconds
+Gaze on navigation clues: 3.600236 seconds
+Number of gazes on navigation clues: 24 times
+Level Number: 1
+Coins: 13
