@@ -5,24 +5,16 @@ using iView;
 
 public class ChooseSystem : MonoBehaviour
 {
-
+    /*
+     * Sets up the screen in the beginning where the player can choose between the three systems
+     */ 
     private Button playButton;
 
     private GameObject menue;
-    private GameObject player;
-    private GameObject eyeTracker;
-    private GameObject clues;
     private GameObject gameControlObj;
-    private GameObject compass;
-    private GameObject timer;
-    private GameObject calibrationScreen;
 
     private int system = 3;
-    int calibrationType = 5;
 
-    private FirstPersonController firstpersoncontroller;
-
-    private bool didCalibration = false;
 
 
     // Use this for initialization
@@ -94,21 +86,4 @@ public class ChooseSystem : MonoBehaviour
 
     }
 
-    private void calibrateET()
-    {
-        if (didCalibration == false)
-        {
-
-            SMIGazeController.Instance.StartCalibration(calibrationType);
-            didCalibration = true;
-
-        }
-
-    }
-
-    void OnGui()
-    {
-
-
-    }
 }

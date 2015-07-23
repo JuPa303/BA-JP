@@ -4,6 +4,9 @@ using iView;
 
 public class GazeArea : GazeMonobehaviour
 {
+    /*
+     * This is the actual counter of how often the user looks at the map. Also the time will be recorded.
+     */
 
     public float mapGazeTimer = 0.0f;
     public bool isFocused = false;
@@ -23,6 +26,7 @@ public class GazeArea : GazeMonobehaviour
 
     }
 
+    //If the gaze enteres the area, time will be added and the counter increased.
     public void OnGazeEnter()
     {
 

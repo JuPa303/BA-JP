@@ -7,7 +7,9 @@ using System.Collections.Generic;
 
 public class EyetrackerGazeCounter : GazeMonobehaviour
 {
-
+    /*
+     * This class counts how often the gaze hits the map.
+     */
     SampleData sample;
     Vector2 gazePos;
     private bool increasing = false;
@@ -18,7 +20,7 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
 
     private GazeArea oldSelection;
 
-    // Use this for initialization
+    // Map area is a defined area around the map. Since the map is just a projection of a second camera, there has to be another object which lies on top of it, so the object will be detected.
     void Start()
     {
         area = GameObject.FindGameObjectWithTag("MapArea");
@@ -31,6 +33,7 @@ public class EyetrackerGazeCounter : GazeMonobehaviour
         checkGazeOnMap();
     }
 
+    // With the help of raycasting the gaze on the specified area can be detected .
     private void checkGazeOnMap()
     {
 

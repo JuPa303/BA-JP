@@ -50,7 +50,7 @@ public class EyeTrackerData : GazeMonobehaviour
     }
 
 
-    // Update is called once per frame
+    // Time of gazes on the clues is updated, also if the gaze is on the clue
     void Update()
     {
 
@@ -64,20 +64,17 @@ public class EyeTrackerData : GazeMonobehaviour
 
     }
 
-
+    //two gaze points are recorded, the have to have a specific distance for not being too close to each other
     private void getGazes()
     {
-
-        //Debugmode is Active
-
 
         if (hasFirstPoint == false || gazePoint1 == Vector2.zero)
         {
 
             gazePoint1 = sample.averagedEye.gazePosInScreenCoords();
             hasFirstPoint = true;
-
         }
+
         else
         {
             gazePoint2 = sample.averagedEye.gazePosInScreenCoords();
@@ -106,7 +103,6 @@ public class EyeTrackerData : GazeMonobehaviour
         if (distanceOfGazeVectors <= 30)
         {
             hasFirstPoint = true;
-            //Debug.Log("Skip");
 
         }
 
@@ -150,9 +146,6 @@ public class EyeTrackerData : GazeMonobehaviour
             objectInFocus = SMIGazeController.Instance.GetObjectInFocus(FocusFilter.WorldSpaceObjects);
             if (objectInFocus.tag == "AOI" || objectInFocus.tag == "Arrow")
             {
-                //clue = objectInFocus;
-
-
                 if ((objectInFocus.tag == "Arrow") && (quitCounting == false))
                 {
                     gazeTimeCounter += Time.deltaTime * 1;
@@ -162,8 +155,6 @@ public class EyeTrackerData : GazeMonobehaviour
                     {
                         gazeCounter++;
                         isFocused = true;
-
-
                     }
 
                     OnClueStatus(false);
@@ -173,19 +164,13 @@ public class EyeTrackerData : GazeMonobehaviour
                 {
                     data.GetComponent<Filewriter>().gazeTimeCounter = gazeTimeCounter;
                 }
-
-
-
-                //Debug.Log("gaze on clue");
-
+                //Gaze on clue
             }
 
             else
             {
                 killTimer = 0;
                 isFocused = false;
-
-
             }
         }
 
@@ -193,32 +178,18 @@ public class EyeTrackerData : GazeMonobehaviour
         {
             Debug.Log(e);
         }
-
-
     }
 
 
+    //if the gazing time is higher than the ficationTime, the arrow disapperars and won't be shown again as long if the player is not re-entering the room.
     private void checkGazeTime()
     {
         if (killTimer >= fixationTime)
         {
             highContr.arrowIsKilled = true;
-            //OnClueStatus(false);
         }
 
     }
-
-
-    //draw gaze as rectangle
-    private void OnGUI()
-    {
-        //Texture2D square = new Texture2D(10, 10);
-        //square.SetPixel(1, 1, Color.white);
-        //square.Apply();
-        //GUI.DrawTexture(new Rect(gazePos.x, gazePos.y, square.width, square.height), square);
-
-    }
-
 
 }
 

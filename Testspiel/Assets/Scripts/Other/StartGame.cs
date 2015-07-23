@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour
 {
-
+    /*
+     *  This controls the whole starting scene, which gui texts are apppearing and disappearing. 
+     */
+      
     private GameObject systemMenue;
     private GameObject mainMenue;
     private GameObject controlMenue;
@@ -28,7 +31,7 @@ public class StartGame : MonoBehaviour
 
     }
 
-
+    //the choosing-system window will be displayed
     public void chooseSystem()
     {
 
@@ -36,18 +39,21 @@ public class StartGame : MonoBehaviour
         mainMenue.SetActive(false);
     }
 
-    public void backToMainMenue()
+    //getting back to the main menu
+    public void backToMainMenu()
     {
         controlMenue.SetActive(false);
         mainMenue.SetActive(true);
     }
 
+    //shows all the controls the player can use
     public void showControls()
     {
         controlMenue.SetActive(true);
         mainMenue.SetActive(false);
     }
 
+    //loads the testing scene
     public void testControls()
     {
         Application.LoadLevel("Testumgebung");

@@ -4,6 +4,10 @@ using System.Collections;
 public class FirstPersonController : MonoBehaviour
 {
 
+    /*
+     * These are the controls for the player, how to move, jump and look around. 
+     */
+
     private float movementSpeed = 3.5f;
     public float mouseSensitivity = 3.0f;
 
@@ -21,8 +25,6 @@ public class FirstPersonController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
 
         characterController = GetComponent<CharacterController>();
         navAgent = GetComponent<NavMeshAgent>();
@@ -55,7 +57,7 @@ public class FirstPersonController : MonoBehaviour
         {
             navAgent.enabled = false;
             verticalVelocity = jumpSpeed;
-          
+
             StartCoroutine(wait());
         }
 
@@ -78,6 +80,8 @@ public class FirstPersonController : MonoBehaviour
 
     }
 
+
+    //wait until the player is back on the ground, otherwise  the navmeshagent and this script will conflict
     IEnumerator wait()
     {
 

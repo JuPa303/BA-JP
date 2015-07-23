@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class CoinCounter : MonoBehaviour
 {
-
+    /*
+     * Counts the collected coins
+     */
     public int counter = 0;
     public Text counterText;
     // Use this for initialization
@@ -16,7 +18,6 @@ public class CoinCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
         counterText.text = "" + counter;
     }
 }

@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PauseGame : MonoBehaviour
 {
-
+    /*
+     * If the player hits ESC during the gameplay, the game pauses and he is asked if he wants to return to the game or go back to the main menu.  
+     */
     private bool showWindow;
     private GameObject pauseMenue;
     private GameObject player;
@@ -20,38 +22,30 @@ public class PauseGame : MonoBehaviour
         pauseMenue.SetActive(false);
     }
 
-    // Update is called once per frame
+    // If the user presses ESC, the window will appear and the cursor can be used.
     void Update()
     {
 
         if (Input.GetKey(KeyCode.Escape))
         {
-
-            //Eyetracker gibt null reference aus, abfangen
-            //bool wenn in status, dann nicht mehr tracken
-
-            //Debug.Log("Pressed ESC");
             pauseMenue.SetActive(true);
             player.GetComponent<FirstPersonController>().enabled = false;
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-
         }
     }
 
-    public void backToMainMenue()
+    //returning to the main menu
+    public void backToMainMenu()
     {
-       // Debug.Log("go back to menue");
-        //player.GetComponent<EyeTrackerData>().isChosen = false;
-        //eyeTrackerController.SetActive(false);
-
         Application.LoadLevel("Start");
     }
 
+
+    //if canceled, returning to the scene, cursor is locked and invisible, window disappears
     public void cancel()
     {
-
         pauseMenue.SetActive(false);
         player.GetComponent<FirstPersonController>().enabled = true;
 
@@ -59,9 +53,5 @@ public class PauseGame : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-
     }
-
-
-
 }

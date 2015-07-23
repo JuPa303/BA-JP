@@ -3,7 +3,9 @@ using System.Collections;
 
 public class ChangeColor : MonoBehaviour
 {
-   
+    /*
+     * This is written to change the color and density of the arrows at runtime
+     */
 
     // Use this for initialization
     void Start()
@@ -17,6 +19,7 @@ public class ChangeColor : MonoBehaviour
 
     }
 
+    //the arrows turn red with a density of 50
     public void turnToRed()
     {
         GameObject[] clues;
@@ -27,10 +30,7 @@ public class ChangeColor : MonoBehaviour
         {
 
             go.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 50);
-          
+
         }
-
     }
-
- 
 }

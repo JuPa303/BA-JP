@@ -5,6 +5,10 @@ using System.IO;
 public class Filewriter : MonoBehaviour
 {
 
+    /*
+     * If the Player reaches the end of each level, a .txt file will be created which contens all crucial information.
+     */
+
     // Use this for initialization
     private string fileName;
     private string sceneName;
@@ -30,6 +34,8 @@ public class Filewriter : MonoBehaviour
 
     }
 
+
+    //file name will be the current scene and a counter for not confusing them
     private void setFileName()
     {
         fileName = sceneName + sceneCounter + ".txt";
@@ -45,6 +51,8 @@ public class Filewriter : MonoBehaviour
         }
     }
 
+
+    //This is the data which will be written into the file.
     private void writeData()
     {
         if (countingEnds == true)

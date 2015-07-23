@@ -3,6 +3,10 @@ using System.Collections;
 
 public class FindClosestClue : MonoBehaviour
 {
+    /*
+     * This script detects, which clue is the closest to the player. 
+     */
+
     public GameObject closest;
     private GameObject[] clues;
     private NavMeshAgent nav;
@@ -20,8 +24,6 @@ public class FindClosestClue : MonoBehaviour
     //returns the closest clue by calculating the distances
     public GameObject FindClue()
     {
-
-
         float distance = Mathf.Infinity;
 
         foreach (GameObject go in clues)

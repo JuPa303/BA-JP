@@ -63,6 +63,7 @@ public class CompassEnd : MonoBehaviour
 
     }
 
+    //the different levels will start if the player clicks on the "Okay"-Button
     public void pressOkay()
     {
         if (system != 3)

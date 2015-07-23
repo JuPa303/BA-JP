@@ -3,14 +3,16 @@ using System.Collections;
 
 public class MapCamera : MonoBehaviour
 {
-
+    /*
+     * This Script allows the second camera, which is displaying the map, to follow the player. Also the size is fixed.
+     */
     public bool showMap;
     private GameObject player;
     private Camera mapCamera;
 
     public Texture2D playerTex;
 
-
+    //the cursor is not movable and invisible
     void Start()
     {
         mapCamera = gameObject.GetComponent<Camera>();
@@ -31,10 +33,11 @@ public class MapCamera : MonoBehaviour
 
     }
 
+    //this handles the position of the camera
     void OnGUI()
     {
         Vector3 targetPos = mapCamera.WorldToScreenPoint(player.transform.position);
-        
+
 
     }
 

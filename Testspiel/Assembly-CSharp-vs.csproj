@@ -67,10 +67,8 @@
      <Compile Include="Assets\Scripts\Other\CoinScript.cs" />
      <Compile Include="Assets\Scripts\Other\Filewriter.cs" />
      <Compile Include="Assets\Scripts\Other\FirstPersonController.cs" />
-     <Compile Include="Assets\Scripts\Other\GameController.cs" />
      <Compile Include="Assets\Scripts\Other\PauseGame.cs" />
      <Compile Include="Assets\Scripts\Other\PlayerManager.cs" />
-     <Compile Include="Assets\Scripts\Other\RoomEnter.cs" />
      <Compile Include="Assets\Scripts\Other\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\Other\StartGame.cs" />
      <Compile Include="Assets\Scripts\Other\TestControlScript.cs" />

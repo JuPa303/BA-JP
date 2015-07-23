@@ -56,6 +56,8 @@ public class SDGend : MonoBehaviour
 
     }
 
+
+    //if the user clicks on Okay, the chosen level will start
     public void pressOkay()
     {
         if (system != 3)

@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class MinimapEnd : MonoBehaviour
 {
+
+    /*
+     * The endscreen of this level. The player can choose between the two other levels or quitting. A dancing skeleton will appear in the last room.
+     */
     private int system = 3;
 
     private GameObject end;

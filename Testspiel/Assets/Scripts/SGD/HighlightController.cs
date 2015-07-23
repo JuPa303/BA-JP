@@ -3,6 +3,9 @@ using System.Collections;
 
 public class HighlightController : MonoBehaviour
 {
+    /*
+     * This determines when the clue is visible and when it's not. 
+     */
     public Texture aTexture;
     private Vector3 cluePos;
     private Vector3 viewportPos;
@@ -34,11 +37,10 @@ public class HighlightController : MonoBehaviour
     }
 
 
-
-    // Update is called once per frame
+    // If the arrow is not killed yet, it is just made invisible. If it is killed, 
     void Update()
     {
-        // Debug.Log("killed " + arrowIsKilled);
+
         if (arrowIsKilled == false)
         {
             getDataFromScripts();
@@ -47,19 +49,9 @@ public class HighlightController : MonoBehaviour
             cluePos = Camera.main.WorldToScreenPoint(clue.transform.position);
             viewportPos = Camera.main.WorldToViewportPoint(clue.transform.position);
 
-            // If both the x and y coordinate of the returned point is between 0 and 1 (and the z coordinate is positive), then the point is seen by the camera.
-            //Picture only displayed when camera facing towards clue
-            //if ((0 < viewportPos.x && viewportPos.x < 1) && (0 < viewportPos.y && viewportPos.y < 1) && (viewportPos.z > 0))
-            //{
-            //no wall between Player and clue 
-
             if (showClue)
             {
-               
-                    makeArrowVisible();
-
-                
-
+                makeArrowVisible();
             }
             else
             {
@@ -69,7 +61,6 @@ public class HighlightController : MonoBehaviour
         }
         else
         {
-
             arrow.SetActive(false);
         }
     }
@@ -77,22 +68,23 @@ public class HighlightController : MonoBehaviour
     private void setClueStatus(bool isShown)
     {
         showClue = isShown;
-
     }
 
-
+    //get the closest clue from FindClosestClue
     private void getDataFromScripts()
     {
         clue = player.GetComponent<FindClosestClue>().closest;
         arrow = clue.transform.GetChild(0).gameObject;
     }
 
+
+    //sets the density of the arrow to 0
     private void makeArrowInvisible()
     {
         arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 0);
     }
 
-
+    //sets the density of the arrow to 50
     private void makeArrowVisible()
     {
         arrow.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 50);
